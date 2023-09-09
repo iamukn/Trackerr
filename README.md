@@ -10,11 +10,13 @@ Trackerr offers a user-friendly interface that simplifies the management of ship
 
 Authors
 ========
-Ndukwe, Ukaegbu Kingsley <n.u.kingsley@gmail.com>\n
-Amadu Hamza <amaduhamzajaarah300@gmail.com>\n
-Yahaya, Abdulwasiu Dauda <lanrewese1@gmail.com>\n
-Akpanekam, Abasiemek Sunday <Emekky54@gnail.com>\n
-
+Ndukwe, Ukaegbu Kingsley <n.u.kingsley@gmail.com>
+++++
+Amadu Hamza <amaduhamzajaarah300@gmail.com>
+++++
+Yahaya, Abdulwasiu Dauda <lanrewese1@gmail.com>
+++++
+Akpanekam, Abasiemek Sunday <Emekky54@gnail.com>
 Features
 =========
 
