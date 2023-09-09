@@ -8,6 +8,13 @@ Welcome to Trackerr, the ultimate parcel tracking application designed for vendo
 
 Trackerr offers a user-friendly interface that simplifies the management of shipments and ensures transparency in tracking, helping you build trust with your customers. Whether you are a small online store or a large e-commerce platform, Trackerr is the solution for you.
 
+Authors
+========
+Ndukwe, Ukaegbu Kingsley <n.u.kingsley@gmail.com>
+Amadu Hamza <amaduhamzajaarah300@gmail.com>
+Yahaya, Abdulwasiu Dauda <lanrewese1@gmail.com>
+Akpanekam, Abasiemek Sunday <Emekky54@gnail.com>
+
 Features
 =========
 
