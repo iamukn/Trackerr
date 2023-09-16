@@ -1,0 +1,86 @@
+    html {
+        height: 100%;
+        max-height: fit-content;
+        margin: 0;
+        padding: 0;
+        font-family: "Lucida Console", "Courier New", monospace, sans-serif;
+        background-color: #15156b;
+        /* Set your desired background color for the entire page */
+    }
+    
+    .tracking-section,
+    .management-section,
+    .search-filter-section {
+        display: contents;
+    }
+    
+    .tabs {
+        padding-top: 3%;
+        margin: 1%;
+        text-align: center;
+    }
+    
+    body {
+        height: 100%;
+        margin: 5px 0px 5px 0px;
+        padding: 0;
+        background-color: transparent;
+    }
+    
+    .dashboard-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    /* Style for the search and filter section on the left */
+    
+    .search-filter-section {
+        flex: 1;
+        /* Expands to take available width */
+        background-color: #f0f0f0;
+        /* Set your desired background color */
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    /* Style for the settings dropdown */
+    
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin-left: auto;
+        /* Pushes the dropdown to the right side */
+    }
+    /* Style for the dropdown menu items */
+    
+    .dropdown-menu {
+        min-width: 200px;
+        /* Set the width as needed */
+    }
+    
+    .tracking-section {
+        background-color: #ffc107;
+        /* Set your desired background color */
+        padding: 20px;
+        box-sizing: border-box;
+        margin-right: 20px;
+        /* Add spacing between sections */
+    }
+    /* Style for the management section */
+    
+    .management-section {
+        background-color: #17a2b8;
+        /* Set your desired background color */
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    footer {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }

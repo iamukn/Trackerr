@@ -79,6 +79,7 @@ const citiesByState = {
     "Zamfara": ["Gusau", "Birnin Magaji", "Anka", "Talata Mafara", "Maru", "Bungudu", "Kaura Namoda", "Shinkafi", "Gummi", "Bakura"],
 };
 
+
 const stateSelect = document.getElementById("validationCustom04");
 const citySelect = document.getElementById("validationCustom03");
 
