@@ -11,6 +11,11 @@ html {
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: white;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 a {
   color: white;
@@ -65,26 +70,47 @@ input {
 }
 .track-btn {
   height: 45px;
+  width: 100px;
 }
 .search-section {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 150px;
   padding: 50px;
 }
 .section-text {
   font-size: 15px;
 }
+
 h1 {
   color: red;
 }
 header {
   border-bottom: 1px solid black;
   box-shadow: 0 6px 8px -5px rgba(0, 0, 0, 0.15);
-  background-color: whitesmoke;
+  background: radial-gradient(
+    circle at 100%,
+    #333,
+    #333 50%,
+    #a753ff 75%,
+    #333 75%
+  );
+  clip-path: polygon(50% 0, 100% 0, 100% 84%, 65% 100%, 35% 100%, 0 85%, 0 0);
 }
 .register-li {
   color: #a753ff;
 }
 .register-li:hover {
   color: #b39eb5;
+}
+
+.product-display {
+  height: 600px;
+  max-width: 1100px;
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 50px;
+}
+main {
+  text-align: center;
 }

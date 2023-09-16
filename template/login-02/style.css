@@ -29,6 +29,9 @@ body {
   width: 24px;
   height: 24px;
 }
+button:hover {
+  background-color: white;
+}
 
 .socials-row > a {
   padding: 8px;
