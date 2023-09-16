@@ -1,11 +1,12 @@
-    html {
+    .html,
+    body {
         height: 100%;
         max-height: fit-content;
         margin: 0;
+        margin: 5px 0px 5px 0px;
         padding: 0;
         font-family: "Lucida Console", "Courier New", monospace, sans-serif;
-        background-color: #15156b;
-        /* Set your desired background color for the entire page */
+        background-color: #76bccf;
     }
     
     .tracking-section,
@@ -14,17 +15,22 @@
         display: contents;
     }
     
-    .tabs {
-        padding-top: 3%;
-        margin: 1%;
-        text-align: center;
+    .centered-tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 0%;
     }
+    /* Center-align the tab links within the tabs container */
     
-    body {
-        height: 100%;
-        margin: 5px 0px 5px 0px;
-        padding: 0;
-        background-color: transparent;
+    .centered-tabs .nav.nav-tabs {
+        justify-content: center;
+    }
+    /* Center-align the tab content within the tab container */
+    
+    .centered-tabs .tab-content.dashboard-container {
+        text-align: center;
     }
     
     .dashboard-container {
