@@ -17,10 +17,13 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:700&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <title>Trackerr</title>
-    <link rel="stylesheet" href="//Trackerr/static/styles/landingPage.css" />
-    <link rel="stylesheet" href="//Trackerr/static/styles/normalize.css" />
+
+    <link rel="stylesheet" href="/Trackerr/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/landingPage.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
     </style>
@@ -30,7 +33,7 @@
       <nav class="nav-bar">
         <div class="logo">
           <img
-            src="//Trackerr/static/login-02/assets/trackerr-logo.jpg"
+            src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
             alt="logo"
             height="50px"
             width="80px"
@@ -64,5 +67,17 @@
     <main>
       <section class="product-display"></section>
     </main>
+    <footer>
+      <small>
+        <a href="E-commerce">E-Commerce Solutions</a>
+        <p>
+          © <span id="year"></span> ALX Final Project · All Rights Reserved |
+          <a href="privacy">Privacy</a>
+        </p>
+      </small>
+    </footer>
+    <script>
+      document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
   </body>
 </html>
