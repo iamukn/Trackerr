@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/template/styles/vendorPage.css">
+    <link rel="stylesheet" href="/static/styles/vendorPage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background-color: #76bccf;
+            background-color: white;
         }
     </style>
 </head>
@@ -22,7 +22,7 @@
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <img src="/template/Trakerr.jpeg" alt="Company Logo" width="100" height="50" class="logo" title="Our Company Logo">
+                <img src="/static/image/Trakerr.jpeg" alt="Company Logo" width="100" height="50" class="logo" title="Our Company Logo">
             </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,17 +32,10 @@
                     <li><a class="dropdown-item" href="#">Change Password</a></li>
                     <li><a class="dropdown-item" href="#">Change Phone Number</a></li>
                     <li><a class="dropdown-item" href="#">Update Address</a></li>
+                    <li><a class="dropdown-item" href="landingPage.html">Log Out</a></li>
                 </ul>
             </div>
-            <div>
-                <section class="container">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="landingPage.html" class="btn1">Log Out</a>
-                        </li>
-                    </ul>
-                </section>
-            </div>
+           
         </nav>
     </section>
 </header>
@@ -99,7 +92,7 @@
                         <input type="text" id="searchInput" placeholder="Search by Tracking Number">
                         <select id="filterSelect">
                         <option value="all">All</option>
-                        <option value="shipped">Shipped</option>
+                        <option value="Pending">Pending</option>
                         <option value="intransit">In Transit</option>
                         <option value="delivered">Delivered</option>
                         <option value="returned">Returned</option>
@@ -115,7 +108,7 @@
     </section>
 
 
-    <script src="template/script/vendorPage.js"></script>
+    <script src="/static/script/vendorPage.js"></script>
     <footer>
         <small>
             <a href="E-commerce">E-Commerce Solutions</a>
