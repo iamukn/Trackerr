@@ -5,6 +5,9 @@ from flask import Flask, render_template, request, redirect, session, g, url_for
 from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
+from models.py_files.welcome_msg import email as mail
+
+
 app = Flask(__name__)
 cors = CORS(app)
 app.secret_key = os.urandom(24)
@@ -50,6 +53,7 @@ def signup():
         phone = request.form['phone']
         # Register the data to the database
         db.register(companyName=com_name, service=service, firstName=firstName, lastName=lastName, email=email, username=username, password=password, companyAddr=companyAddr, country=country, city=city, phone=phone)
+        mail(email=email, username=username)
         return redirect(url_for('login'))
     else:
         return render_template('signup.html')
@@ -62,6 +66,16 @@ def dashboard():
         return render_template('dashboard.html', user=session['user'])
     else:
         return redirect(url_for(home))
+
+
+@app.route('/recover', methods=['GET', 'POST'], strict_slashes=False)
+def recover():
+    """ recovery password function"""
+    if request.method == 'POST':
+        rec_email = request.form['email']
+        msg = db.recovery(rec_email)
+        return render_template('recovery.html', msg=msg)
+    return render_template('recovery.html')
 
 @app.route('/logout', strict_slashes=False)
 def logout():

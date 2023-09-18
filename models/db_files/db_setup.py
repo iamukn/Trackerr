@@ -4,6 +4,10 @@
 
 from bcrypt import checkpw, gensalt, hashpw
 from pymongo import MongoClient
+from random import randint
+import yagmail
+import os
+
 #from models.py_files.welcome_msg import email
 # creates an instance of MongoDB class
 client = MongoClient("localhost", 27017)
@@ -108,3 +112,23 @@ class UserInfo:
                 return "Your username or email is incorrect"
         else:
             return "Incorrect credentials"
+
+    def recovery(self, rec_email: str) -> str:
+        """ Resets a password and sends an email to the client """
+        otp = str(randint(125800, 989899)).encode()
+        temp_pass = hashpw(otp, gensalt())
+        otp = otp.decode()
+        # check to see if the email is in the database
+        if reg.find_one({'Email': rec_email}):
+            reg.update_one({'Email': rec_email}, {'$set': {'password': temp_pass}})
+        # sends email to the customer with their otp
+
+            email_addr = os.getenv('email')
+            password = os.getenv('password')
+            yagmail.register(email_addr, password)
+            yag = yagmail.SMTP(email_addr)
+            yag.send(to=rec_email, subject='Alice from Trackerr', contents= f'<p> Your OTP is <b> {otp} </b>. Change your password immediately you login</p>')
+            return 'Check your email for your one time password'
+
+        else:
+            return 'Not a registered email address'
