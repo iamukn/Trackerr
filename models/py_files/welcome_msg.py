@@ -18,6 +18,5 @@ def email(email: str, username: str) -> None:
     # sends the mail to the client
     with open('welcome_txt.txt', 'r') as f:
         data = f.read()
-        yag.send(to=email, subject= 'Testing the Mic', contents=f'Hello {username} \n'+ data)
-    print('Successful :)')
+        yag.send(to=email, subject= 'Alice from Trackerr', contents=f'Hello {username} \n'+ data)
 
