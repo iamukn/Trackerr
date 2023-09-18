@@ -4,16 +4,11 @@
 from flask import Flask, render_template, request, redirect, session, g, url_for
 from flask_cors import CORS
 import os
+from models.db_files.db_setup import UserInfo
 app = Flask(__name__)
 cors = CORS(app)
 app.secret_key = os.urandom(24)
-
-def validate(username, password):
-    if username == 'username' and password == 'password':
-        return True
-    else:
-        return False
-
+db = UserInfo()
 
 # root  route to serve the landing page
 @app.route('/', strict_slashes=False)
@@ -29,7 +24,7 @@ def login():
         password = request.form['password']
 
         # checks the username and password in the database
-        if validate(username, password):
+        if db.auth(username, password):
 
             session['user'] = username
             return redirect(url_for('dashboard'))
@@ -37,6 +32,27 @@ def login():
             return render_template('login.html', username=username, password=password, err_msg='invalid username or password')
     else:
         return render_template('login.html')
+
+@app.route('/signup', strict_slashes=False, methods=['GET', 'POST'])
+def signup():
+    """Registration"""
+    if request.method == 'POST':
+        com_name = request.form['companyName']
+        service = request.form['service']
+        firstName = request.form['firstName']
+        email = request.form['email']
+        username = request.form['username']
+        lastName = request.form['lastName']
+        password = request.form['password']
+        companyAddr = request.form['companyAddr']
+        country = request.form['country']
+        city = request.form['city']
+        phone = request.form['phone']
+        # Register the data to the database
+        db.register(companyName=com_name, service=service, firstName=firstName, lastName=lastName, email=email, username=username, password=password, companyAddr=companyAddr, country=country, city=city, phone=phone)
+        return redirect(url_for('login'))
+    else:
+        return render_template('signup.html')
 
 
 @app.route('/dashboard', strict_slashes=False)
