@@ -4,7 +4,7 @@
 
 from bcrypt import checkpw, gensalt, hashpw
 from pymongo import MongoClient
-
+#from models.py_files.welcome_msg import email
 # creates an instance of MongoDB class
 client = MongoClient("localhost", 27017)
 # creates a database inside mongoDB
@@ -74,8 +74,14 @@ class UserInfo:
                         "country": country,
                         "City": city,
                         "Phone": phone,
+                        "track_num": 0,
                     }
                 )
+            #    email(email=email, username=username)
+            # increments the registered members in the database
+                count = db.get_collection('count')
+                count.update_one({}, {'$inc': {'registered_members': 1}})
+            
                 return "Registration successful"
             else:
                 # Returns a message if one of the required fields is missing
@@ -100,3 +106,5 @@ class UserInfo:
                     return False
             else:
                 return "Your username or email is incorrect"
+        else:
+            return "Incorrect credentials"
