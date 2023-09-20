@@ -5,7 +5,7 @@
 import yagmail
 import os
 
-def email(email: str, username: str) -> None:
+def email(email: str, user: str) -> None:
     """ Method that sends out an email """
     if not email:
         return
@@ -15,8 +15,9 @@ def email(email: str, username: str) -> None:
     #registers the email and pw to keyframes
     yagmail.register(sender, pw)
     yag = yagmail.SMTP(sender)
+    headers = {'Reply-to': 'officialtrackerr@gmail.com'}
     # sends the mail to the client
-    with open('welcome_txt.txt', 'r') as f:
+    with open('./models/py_files/welcome_txt.txt', 'r') as f:
         data = f.read()
-        yag.send(to=email, subject= 'Alice from Trackerr', contents=f'Hello {username} \n'+ data)
+        yag.send(to=email, subject= 'Welcome to Trackerr', headers=headers, contents=f'Hello {user} \n'+ data)
 

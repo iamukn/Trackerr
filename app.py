@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, session, g, url_for
 from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
-from models.py_files.welcome_msg import email as mail
+from models.py_files.welcome_msg import email as email_msg
 
 
 app = Flask(__name__)
@@ -28,7 +28,6 @@ def login():
 
         # checks the username and password in the database
         if db.auth(username, password):
-
             session['user'] = username
             return redirect(url_for('dashboard'))
         else:
@@ -52,9 +51,14 @@ def signup():
         city = request.form['city']
         phone = request.form['phone']
         # Register the data to the database
-        db.register(companyName=com_name, service=service, firstName=firstName, lastName=lastName, email=email, username=username, password=password, companyAddr=companyAddr, country=country, city=city, phone=phone)
-        mail(email=email, username=username)
-        return redirect(url_for('login'))
+        try:
+            db.register(companyName=com_name, service=service, firstName=firstName, lastName=lastName, email=email, username=username, password=password, companyAddr=companyAddr, country=country, city=city, phone=phone)
+            email_msg(email, username)
+        except Exception:
+            return 'An error occured'
+
+        finally:
+            return redirect(url_for('login'))
     else:
         return render_template('signup.html')
 

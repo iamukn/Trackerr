@@ -8,7 +8,6 @@ from random import randint
 import yagmail
 import os
 
-#from models.py_files.welcome_msg import email
 # creates an instance of MongoDB class
 client = MongoClient("localhost", 27017)
 # creates a database inside mongoDB
@@ -18,6 +17,32 @@ db = client.tracker_reg
 # track_col = db.create_collection('tracking')
 # count_col = db.create_collection('counts')
 reg = db.get_collection("registration")
+
+
+
+def update_pass(username: str, oldPw: str, newPw: str) -> str:
+    """updates password in the database """
+    col = db.get_collection('registration')
+    data1 = col.find_one({'Email': username})
+    data2 = col.find_one({'Username': username})
+    newPw = hashpw(str(newPw).encode(), gensalt())
+    oldPw = str(oldPw).encode()
+
+    # checks if the user logged in user their email or username
+    if data1:
+        if checkpw(oldPw, data1.get('password')):
+            col.update_one({'Email': username}, {'$set': {'password': newPw}})
+            return 'Password changed successfully'
+        else:
+            return 'incorrect password'
+    elif data2:
+        if checkpw(oldPw, data2.get('password')):
+            col.update_one({'Username': username}, {'$set': {'password': newPw}})
+            return 'Password changed successfully'
+        else:
+            return 'incorrect password'
+    else:
+        return
 
 
 # Class to handle the registration, tracking updating and authentication
@@ -79,9 +104,9 @@ class UserInfo:
                         "City": city,
                         "Phone": phone,
                         "track_num": 0,
+                        "subscription": 'trial'
                     }
                 )
-            #    email(email=email, username=username)
             # increments the registered members in the database
                 count = db.get_collection('count')
                 count.update_one({}, {'$inc': {'registered_members': 1}})
@@ -93,25 +118,26 @@ class UserInfo:
 
     def auth(self, login: str, password: str) -> bool:
         """Method that validates the login in the database using email or username"""
+        password = password
         if login and password:
             data = reg.find_one({"Username": login})
             data2 = reg.find_one({"Email": login})
             if data:
                 res = data.get("Username")
-                if res == login and checkpw(password.encode(), data.get("password")):
+                if checkpw(password.encode(), data.get("password")):
                     return True
                 else:
                     return False
             elif data2:
                 res1 = data2.get("Email")
-                if res1 == login and checkpw(password.encode(), data2.get("password")):
+                if checkpw(password.encode(), data2.get("password")):
                     return True
                 else:
                     return False
             else:
-                return "Your username or email is incorrect"
+                return False
         else:
-            return "Incorrect credentials"
+            return False
 
     def recovery(self, rec_email: str) -> str:
         """ Resets a password and sends an email to the client """
@@ -132,3 +158,8 @@ class UserInfo:
 
         else:
             return 'Not a registered email address'
+
+    def pwUpdate(self,username, oldPw: str, newPw: str) -> str:
+        """ Method to change a password """
+        return update_pass(username, oldPw, newPw)
+
