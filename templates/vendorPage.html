@@ -77,11 +77,19 @@
                         <h2>Tracking Information Management</h2>
                         <form id="trackingForm">
                             <input type="text" id="trackingNumber" placeholder="Tracking Number" required>
-                            <input type="text" id="trackingStatus" placeholder="Status (e.g., Shipped)" required>
+                            
                             <button type="submit">Register Tracking</button>
                         </form>
+                        
+                        <br>
                         <button id="updateStatus">Update Status</button>
-                        <input type="text" id="newStatus" placeholder="New Status (e.g., In Transit)">
+                        <select id="filterSelect">
+                        <option value="all">All</option>
+                        
+                        <option value="intransit">In Transit</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="returned">Returned</option>
+                    </select>
                     </div>
                     <hr>
                 </div>
@@ -108,7 +116,7 @@
     </section>
 
 
-    <script src="/static/script/vendorPage.js"></script>
+    <script src="/static/scripts/vendorPage.js"></script>
     <footer>
         <small>
             <a href="E-commerce">E-Commerce Solutions</a>
@@ -119,7 +127,8 @@
             </p>
         </small>
     </footer>
-
+    
+      
 </body>
 
 </html>

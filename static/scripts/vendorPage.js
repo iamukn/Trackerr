@@ -1,29 +1,42 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const generateTrackingButton = document.getElementById("generateTracking");
-    const trackingNumberDisplay = document.getElementById("trackingNumberDisplay");
-    const trackingForm = document.getElementById("trackingForm");
-    const updateStatusButton = document.getElementById("updateStatus");
-    const newStatusInput = document.getElementById("newStatus");
-    const searchInput = document.getElementById("searchInput");
-    const filterSelect = document.getElementById("filterSelect");
-    const searchFilterButton = document.getElementById("searchFilterButton");
-    const resultList = document.getElementById("resultList");
+// Function to generate a random tracking code
 
-    // Event listeners and functions for dashboard features go here
+document.addEventListener('DOMContentLoaded', function() {
+    const trackingForm = document.getElementById('trackingForm');
+    const trackingNumberInput = document.getElementById('trackingNumber');
+    const updateStatusButton = document.getElementById('updateStatus');
+    const filterSelect = document.getElementById('filterSelect');
 
-    // Example event listener for generating a tracking number
-    generateTrackingButton.addEventListener("click", function() {
-        // Generate a unique tracking number and display it
-        const uniqueTrackingNumber = generateUniqueTrackingNumber();
-        trackingNumberDisplay.textContent = `Generated Tracking Number: ${uniqueTrackingNumber}`;
+    trackingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const trackingNumber = trackingNumberInput.value;
+
+        if (isValidTrackingNumber(trackingNumber)) {
+            // Create a pop-up message for successful registration
+            alert('Item successfully registered');
+
+            // You can add logic here to save the tracking information
+            // Set the tracking status to "Pending" in your database, for example
+        } else {
+            // Create a pop-up message for an invalid tracking number
+            alert('Invalid tracking number');
+        }
     });
 
-    // Example function for generating a unique tracking number
-    function generateUniqueTrackingNumber() {
-        // Implement your logic to generate a unique tracking number here
-        return "XYZ123456";
+    updateStatusButton.addEventListener('click', function() {
+        const selectedOption = filterSelect.value;
+        if (selectedOption === 'all') {
+            // Create a pop-up message for selecting a status
+            alert('Please select a new status for the tracking number');
+        } else {
+            // Create a pop-up message for updating the status
+            alert(`Tracking Number updated to "${selectedOption}"`);
+        }
+    });
+
+    function isValidTrackingNumber(trackingNumber) {
+        // Check if the tracking number has at least 8 characters and contains alphabets
+        const isValid = /^[A-Za-z0-9]{8,}$/.test(trackingNumber);
+        return isValid;
     }
-
-    // You will need to add more event listeners and functions for other features.
-
 });
