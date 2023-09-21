@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 """ Connects to the tracking collection for CRUD operations """
 
-
-from db_setup import db, reg
-from trackGen import trackGen
+from pymongo import MongoClient
+from models.db_files.track_gen import trackGen
 import datetime
 
+
+client = MongoClient('localhost', 27017)
+db = client.tracker_reg
+reg = db.get_collection('registration')
 class Tracking:
     """ tracking number class to handle tracking related task """
     def __init__(self):
@@ -38,7 +41,7 @@ class Tracking:
         """Method that retrieves the tracking information"""
         data = self.db.find_one({'tracking_number': tracking})
         try:
-            return {'status1': data.get('status1'), 'status2': data.get('status2')}
+            return data
         except Exception:
             return 'Please enter a valid tracking number'
 

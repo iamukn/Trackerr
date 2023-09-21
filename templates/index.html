@@ -1,5 +1,11 @@
 <h1> Welcome to the landing page </h1>
 
+<br/>
+<form action={{url_for('home')}} method='post'>
+    <input type='text' name='tracking' required>
+    <input type='submit' value='Track'>
+</form>
+
 <a href={{url_for('login')}}> Login </a>
 
 

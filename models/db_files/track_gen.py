@@ -3,7 +3,7 @@
 
 
 from random import randint
-from db_setup import db
+from models.db_files.db_setup import db
 
 col = db.get_collection('tracking')
 

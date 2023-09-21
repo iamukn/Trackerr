@@ -6,16 +6,22 @@ from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
 from models.py_files.welcome_msg import email as email_msg
+from models.db_files.track_db import Tracking
 
 
 app = Flask(__name__)
 cors = CORS(app)
 app.secret_key = os.urandom(24)
 db = UserInfo()
+track = Tracking()
 
 # root  route to serve the landing page
-@app.route('/', strict_slashes=False)
+@app.route('/', strict_slashes=False, methods=['GET', 'POST'])
 def home():
+    if request.method == 'POST':
+        track_num = request.form['tracking']
+        return redirect(url_for('tracking_', num=str(track_num.upper()) ))
+
     """ landing page route """
     return render_template('index.html')
 
@@ -34,6 +40,38 @@ def login():
             return render_template('login.html', username=username, password=password, err_msg='invalid username or password')
     else:
         return render_template('login.html')
+
+
+@app.route('/tracking', methods=['GET', 'POST'], strict_slashes=False)
+def tracking():
+    if request.method == 'POST':
+        tracking_num = request.form['tracking']
+        res = track.tracker(str(tracking_num.upper()))
+        s1 = res.get('status1')
+        s2 = res.get('status2')
+        if s1 and s2:
+            return render_template('tracking_info2.html', num=tracking_num, s1=s1, s2=s2)
+        elif s1:
+            return render_template('tracking_info.html', num=tracking_num, s1=s1)
+        else:
+            return redirect(url_for('tracking'))
+    else:
+        return render_template('tracking.html')
+
+@app.route('/tracking/<num>', methods=['GET', 'POST'], strict_slashes=False)
+def tracking_(num):
+    if num:
+        res = track.tracker(num)
+        s1 = res.get('status1')
+        s2 = res.get('status2')
+        if s1 and s2:
+            return render_template('tracking_info2.html',num=num, s1=s1, s2=s2)
+        elif s1:
+            return render_template('tracking_info.html',num=num, s1=s1)
+        else:
+            return redirect(url_for('tracking'))
+        
+
 
 @app.route('/signup', strict_slashes=False, methods=['GET', 'POST'])
 def signup():
@@ -69,7 +107,7 @@ def dashboard():
     if g.user:
         return render_template('dashboard.html', user=session['user'])
     else:
-        return redirect(url_for(home))
+        return redirect(url_for('home'))
 
 
 @app.route('/recover', methods=['GET', 'POST'], strict_slashes=False)
