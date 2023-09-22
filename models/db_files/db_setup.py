@@ -22,27 +22,30 @@ reg = db.get_collection("registration")
 
 def update_pass(username: str, oldPw: str, newPw: str) -> str:
     """updates password in the database """
-    col = db.get_collection('registration')
-    data1 = col.find_one({'Email': username})
-    data2 = col.find_one({'Username': username})
-    newPw = hashpw(str(newPw).encode(), gensalt())
-    oldPw = str(oldPw).encode()
+    try:
+        col = db.get_collection('registration')
+        data1 = col.find_one({'Email': username})
+        data2 = col.find_one({'Username': username})
+        newPw = hashpw(str(newPw).encode(), gensalt())
+        oldPw = str(oldPw).encode()
 
-    # checks if the user logged in user their email or username
-    if data1:
-        if checkpw(oldPw, data1.get('password')):
-            col.update_one({'Email': username}, {'$set': {'password': newPw}})
-            return 'Password changed successfully'
+        # checks if the user logged in user their email or username
+        if data1:
+            if checkpw(oldPw, data1.get('password')):
+                col.update_one({'Email': username}, {'$set': {'password': newPw}})
+                return True
+            else:
+                return False
+        elif data2:
+            if checkpw(oldPw, data2.get('password')):
+                col.update_one({'Username': username}, {'$set': {'password': newPw}})
+                return True
+            else:
+                return False
         else:
-            return 'incorrect password'
-    elif data2:
-        if checkpw(oldPw, data2.get('password')):
-            col.update_one({'Username': username}, {'$set': {'password': newPw}})
-            return 'Password changed successfully'
-        else:
-            return 'incorrect password'
-    else:
-        return
+            return False
+    except Exception:
+        return False
 
 
 # Class to handle the registration, tracking updating and authentication
@@ -96,9 +99,9 @@ class UserInfo:
                         "Services": service,
                         "firstName": firstName,
                         "lastName": lastName,
-                        "Username": username,
+                        "Username": username.lower(),
                         "password": password,
-                        "Email": email,
+                        "Email": email.lower(),
                         "Company_Address": companyAddr,
                         "country": country,
                         "City": city,
@@ -144,20 +147,23 @@ class UserInfo:
         otp = str(randint(125800, 989899)).encode()
         temp_pass = hashpw(otp, gensalt())
         otp = otp.decode()
-        # check to see if the email is in the database
-        if reg.find_one({'Email': rec_email}):
-            reg.update_one({'Email': rec_email}, {'$set': {'password': temp_pass}})
-        # sends email to the customer with their otp
+        try:
+            # check to see if the email is in the database
+            if reg.find_one({'Email': rec_email}):
+                reg.update_one({'Email': rec_email}, {'$set': {'password': temp_pass}})
+            # sends email to the customer with their otp
 
-            email_addr = os.getenv('email')
-            password = os.getenv('password')
-            yagmail.register(email_addr, password)
-            yag = yagmail.SMTP(email_addr)
-            yag.send(to=rec_email, subject='Alice from Trackerr', contents= f'<p> Your OTP is <b> {otp} </b>. Change your password immediately you login</p>')
-            return 'Check your email for your one time password'
+                email_addr = os.getenv('email')
+                password = os.getenv('password')
+                yagmail.register(email_addr, password)
+                yag = yagmail.SMTP(email_addr)
+                yag.send(to=rec_email, subject='Alice from Trackerr', contents= f'<p> Your OTP is <b> {otp} </b>. Change your password immediately you login</p>')
+                return 'Check your email for your one time password'
 
-        else:
-            return 'Not a registered email address'
+            else:
+                return 'Not a registered email address'
+        except Exception:
+            return 'Enter a valid email address'
 
     def pwUpdate(self,username, oldPw: str, newPw: str) -> str:
         """ Method to change a password """

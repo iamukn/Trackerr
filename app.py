@@ -1,19 +1,53 @@
 #!/usr/bin/python3
 """ Python flask route """
 
-from flask import Flask, render_template, request, redirect, session, g, url_for
+from flask import Flask, abort, render_template, request, redirect, session, g, url_for
 from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
 from models.py_files.welcome_msg import email as email_msg
 from models.db_files.track_db import Tracking
 
+try:
+    app = Flask(__name__)
+    cors = CORS(app)
+    app.secret_key = os.urandom(24)
+    db = UserInfo()
+    track = Tracking()
+except Exception:
+    abort(400, 'internal error occurred')
 
-app = Flask(__name__)
-cors = CORS(app)
-app.secret_key = os.urandom(24)
-db = UserInfo()
-track = Tracking()
+
+# handling HTTP errors
+@app.errorhandler(400)
+def BadRequest(e):    
+    """ handles 400 errors """
+    return render_template('400.html'), 400
+
+@app.errorhandler(403)
+def forbidden(e):
+    """ handles 403 errors """
+    return render_template('403.html'), 403
+
+@app.errorhandler(404)
+def notFound(e):   
+    """ handles 404 errors """
+    return render_template('404.html'), 404
+
+@app.errorhandler(408)
+def request_time_out(e):
+    """ handles 408 errors """
+    return render_template('408.html'), 408
+
+@app.errorhandler(500)
+def internalServerError(e):
+    """ handles 500 errors """
+    return render_template('500.html'), 500
+
+@app.errorhandler(503)
+def service_unavailable(e):
+    """ handles 503 errors """
+    return render_template('503.html'), 503
 
 # root  route to serve the landing page
 @app.route('/', strict_slashes=False, methods=['GET', 'POST'])
@@ -106,11 +140,18 @@ def dashboard():
     """checks if the user is in the session and serves him his dashboard"""
     if g.user:
         return render_template('dashboard.html', user=session['user'])
-    else:
-        return redirect(url_for('home'))
+    abort(403, 'Unauthorized')
+
+# Route to generate tracking number
+@app.route('/dashboard/generate', strict_slashes=False)
+def generate():
+    if g.user:
+        """method that generates a tracking number"""
+        tracking_number = track.generate(session.get('user'))
+        return tracking_number
 
 
-@app.route('/recover', methods=['GET', 'POST'], strict_slashes=False)
+@app.route('/recovery', methods=['GET', 'POST'], strict_slashes=False)
 def recover():
     """ recovery password function"""
     if request.method == 'POST':
@@ -119,11 +160,32 @@ def recover():
         return render_template('recovery.html', msg=msg)
     return render_template('recovery.html')
 
+@app.route('/dashboard/reset', methods=['GET', 'POST'], strict_slashes=False)
+def reset():
+    """Method that changes password"""
+    if request.method == 'POST':
+        if g.user:
+            username = session['user']
+            print(username)
+            oldPw = request.form['oldPw']
+            newPw = request.form['newPw']
+            if db.pwUpdate(username, oldPw, newPw):
+                return render_template('updatePassword.htm', res='Password changed successfully')
+            else:
+                return render_template('updatePassword.htm',res='Incorrect password')
+        abort(403, 'Unauthorized')
+    elif request.method == 'GET':
+        if g.user:
+            return render_template('updatePassword.htm')
+        abort(403, 'Unauthorized')
+
 @app.route('/logout', strict_slashes=False)
 def logout():
-    """ ends the session """
-    session.pop('user', None)
-    return redirect(url_for('home'))
+    if g.user:
+        """ ends the session """
+        session.pop('user', None)
+        return redirect(url_for('home'))
+
 
 # This routes executes before any requests
 @app.before_request
