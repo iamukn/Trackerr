@@ -35,9 +35,10 @@
           <img
             src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
             alt="logo"
-            height="50px"
+            height="40px"
             width="80px"
             style="border-radius: 5px"
+            class="logo"
           />
         </div>
         <ul>
@@ -46,26 +47,37 @@
           <li><a href="#">Contact</a></li>
         </ul>
         <div>
-          <button class="login">Login</button>
+          <button class="login"><a href="./login.html">Login</a></button>
           <button class="register">Register</button>
         </div>
       </nav>
     </div>
     <header>
+      <div class="hearder-text">
+        <h1>TRACK</h1>
+        <h2>tracking your parcel is easy with us</h2>
+      </div>
       <div class="search-section">
-        <h1>Track your package with Trackerr</h1>
+        <h1>Track</h1>
+
         <input
           type="search"
-          id="search"
+          id="searchInput"
           name="search"
           placeholder="Enter your tracking number"
         />
-        <button type="submit" class="track-btn">Track</button>
+        <button type="submit" class="track-btn" id="trackButton">Track</button>
       </div>
     </header>
 
     <main>
-      <section class="product-display"></section>
+      <!--  HTML structure to include a container for product details -->
+      <div id="searchResults">
+        <h2>My Parcels</h2>
+      </div>
+      <div id="productDetails"></div>
+
+      <article></article>
     </main>
     <footer>
       <small>
@@ -76,8 +88,20 @@
         </p>
       </small>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Trackerr/static/scripts/landingPage.js"></script>
+    <script src="/Trackerr/static/scripts/dummy.js"></script>
+
     <script>
       document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
+
+    <script>
+      const login = document.getElementById("login");
+      login.addEventListener("click", function () {
+        // Redirect to the login page
+        window.location.href = "./login.html";
+      });
     </script>
   </body>
 </html>

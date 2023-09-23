@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parcel Tracking System - Vendor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/vendorPage.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/commonStyle.css" />
+  </head>
+  <body>
+    <div class="div-container">
+      <nav class="nav-bar">
+        <div class="logo">
+          <img
+            src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
+            alt="logo"
+            height="50px"
+            width="80px"
+            style="border-radius: 5px"
+          />
+        </div>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div>
+          <a href="./login.html"><button class="login">Logout</button></a>
+        </div>
+      </nav>
+    </div>
+    <main>
+      <div class="container">
+        <h1>Vendor Tracking System</h1>
+        <button id="generateTrackingBtn">Generate Tracking Number</button>
+
+        <p id="trackingNumberDisplay"></p>
+        <form id="trackingForm">
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" required />
+
+          <label for="productDescription">Product Description:</label>
+          <textarea id="productDescription" required></textarea>
+
+          <label for="status">Status:</label>
+          <select id="status">
+            <option value="Shipped">Shipped</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+
+          <button class="vendor-submit" type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div id="successMessage" class="hidden">
+        <p>Tracking information submitted successfully!</p>
+      </div>
+    </main>
+    <footer>
+      <small>
+        <a href="E-commerce">E-Commerce Solutions</a>
+        <p>
+          © <span id="year"></span> ALX Final Project · All Rights Reserved |
+          <a href="privacy">Privacy</a>
+        </p>
+      </small>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/Trackerr/static/scripts/vendorPage.js"></script>
+    <script>
+      document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
+
+    <script>
+      const login = document.getElementById("login");
+      login.addEventListener("click", function () {
+        // Redirect to the login page
+        window.location.href = "./login.html";
+      });
+    </script>
+  </body>
+</html>

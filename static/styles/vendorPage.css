@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 100px;
+  padding-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.vendor-submit,
+input,
+select,
+textarea {
+  margin: 10px 0;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.vendor-submit {
+  background-color: #a753ff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.vendor-submit:hover {
+  background-color: #b39eb5;
+}
+#generateTrackingBtn {
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
