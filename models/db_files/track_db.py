@@ -61,3 +61,11 @@ class Tracking:
                 return 'Enter a Valid tracking number'
         except Exception:
             return 'Enter a Valid tracking number'
+
+    def site_traffic(self):
+        """ Methods that monitors the site traffic """
+        try:
+            col = db.get_collection('count')
+            col.update_one({'_id': 1}, {'$inc': {'site_traffic': 1}})
+        except Exception as e:
+            return 'Internal error occured'

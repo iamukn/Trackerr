@@ -56,7 +56,10 @@ def home():
         track_num = request.form['tracking']
         return redirect(url_for('tracking_', num=str(track_num.upper()) ))
 
-    """ landing page route """
+    """site count and landing page route """
+    if g.user:
+        return render_template('index.html')
+    track.site_traffic()
     return render_template('index.html')
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
@@ -166,7 +169,6 @@ def reset():
     if request.method == 'POST':
         if g.user:
             username = session['user']
-            print(username)
             oldPw = request.form['oldPw']
             newPw = request.form['newPw']
             if db.pwUpdate(username, oldPw, newPw):
