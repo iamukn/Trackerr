@@ -29,29 +29,37 @@
     </style>
   </head>
   <body>
-    <div class="div-container">
-      <nav class="nav-bar">
-        <div class="logo">
-          <img
-            src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
-            alt="logo"
-            height="40px"
-            width="80px"
-            style="border-radius: 5px"
-            class="logo"
-          />
+    <nav>
+      <div class="div-container">
+        <div class="topnav" id="myTopnav">
+          <div class="nav-items">
+            <div>
+              <a href="#home" class="active"
+                ><img
+                  width="70px"
+                  height="50px"
+                  src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
+                  alt="Logo"
+              /></a>
+              <a href="#news" class="link">News</a>
+              <a href="#contact" class="link">Contact</a>
+              <a href="#about" class="link">About</a>
+              <a href=""><button>Login</button></a>
+              <a href=""><button>Register</button></a>
+            </div>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"
+                ><img
+                  src="/Trackerr/static/assets/icons8-hamburger-button-50 (1).png"
+                  alt="Menu"
+                  style="background-color: white"
+              /></i>
+            </a>
+          </div>
         </div>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <div>
-          <button class="login"><a href="./login.html">Login</a></button>
-          <button class="register">Register</button>
-        </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
     <header>
       <div class="hearder-text">
         <h1>TRACK</h1>
@@ -91,7 +99,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/Trackerr/static/scripts/landingPage.js"></script>
     <script src="/Trackerr/static/scripts/dummy.js"></script>
-
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+    </script>
     <script>
       document.getElementById("year").innerHTML = new Date().getFullYear();
     </script>
