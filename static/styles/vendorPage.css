@@ -1,92 +1,176 @@
-    .html,
-    body {
-        height: 100%;
-        max-height: fit-content;
-        margin: 0;
-        margin: 5px 0px 5px 0px;
-        padding: 0;
-        font-family: "Lucida Console", "Courier New", monospace, sans-serif;
-        background-color: #A753ff;
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+    transition: 0.5s;
+}
+
+@keyframes overflow {
+    0% {
+        overflow: hidden;
     }
-    
-    .tracking-section,
-    .management-section,
-    .search-filter-section {
-        display: contents;
+    100% {
+        overflow: hidden;
     }
-    
-    .centered-tabs {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 0%;
-    }
-    /* Center-align the tab links within the tabs container */
-    
-    .centered-tabs .nav.nav-tabs {
-        justify-content: center;
-    }
-    /* Center-align the tab content within the tab container */
-    
-    .centered-tabs .tab-content.dashboard-container {
-        text-align: center;
-    }
-    
-    .dashboard-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-    }
-    /* Style for the search and filter section on the left */
-    
-    .search-filter-section {
-        flex: 1;
-        /* Expands to take available width */
-        background-color: #f0f0f0;
-        /* Set your desired background color */
-        padding: 20px;
-        box-sizing: border-box;
-    }
-    /* Style for the settings dropdown */
-    
-    .dropdown {
-        position: relative;
-        display: inline-block;
-        margin-left: auto;
-        /* Pushes the dropdown to the right side */
-    }
-    /* Style for the dropdown menu items */
-    
-    .dropdown-menu {
-        min-width: 200px;
-        /* Set the width as needed */
-    }
-    
-    .tracking-section {
-        background-color: #ffc107;
-        /* Set your desired background color */
-        padding: 20px;
-        box-sizing: border-box;
-        margin-right: 20px;
-        /* Add spacing between sections */
-    }
-    /* Style for the management section */
-    
-    .management-section {
-        background-color: #17a2b8;
-        /* Set your desired background color */
-        padding: 20px;
-        box-sizing: border-box;
-    }
-    
-    footer {
-        background-color: black;
-        color: white;
-        padding: 10px;
-        text-align: center;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("/Trackerr/static/login-02/assets/backimage.jpg");
+    background: transparent;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b39eb5;
+    text-decoration: underline;
+}
+
+nav {
+    color: #fff;
+    padding: 10px 0;
+    margin-left: 4%;
+    margin-right: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.div-container {
+    background-color: #333;
+}
+
+button {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    height: 35px;
+    color: white;
+    background-color: #a753ff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b39eb5;
+}
+
+input {
+    width: 600px;
+    height: 45px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+/* dashboard*/
+
+.tracking-section,
+.management-section,
+.search-filter-section {
+    display: contents;
+}
+
+.centered-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0%;
+}
+
+
+/* Center-align the tab links within the tabs container */
+
+.centered-tabs .nav.nav-tabs {
+    justify-content: center;
+}
+
+
+/* Center-align the tab content within the tab container */
+
+.centered-tabs .tab-content.dashboard-container {
+    text-align: center;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+/* Style for the search and filter section on the left */
+
+.search-filter-section {
+    flex: 1;
+    /* Expands to take available width */
+    background-color: #f0f0f0;
+    /* Set your desired background color */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+/* Style for the settings dropdown */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    /* Pushes the dropdown to the right side */
+}
+
+
+/* Style for the dropdown menu items */
+
+.dropdown-menu {
+    min-width: 200px;
+    /* Set the width as needed */
+}
+
+.tracking-section {
+    background-color: #ffc107;
+    /* Set your desired background color */
+    padding: 20px;
+    box-sizing: border-box;
+    margin-right: 20px;
+    /* Add spacing between sections */
+}
+
+
+/* Style for the management section */
+
+.management-section {
+    background-color: #17a2b8;
+    /* Set your desired background color */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

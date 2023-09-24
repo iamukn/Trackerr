@@ -1,77 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/static/styles/pwdupdate.css">
-  <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Trackerr is a parcel tracking system that help vendor to generate a tracking number and track thier parcels" />
+    <meta name="keywords" content="track, tracking number, vendor, parcel, customer" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:700&display=swap" rel="stylesheet" />
+
+    <title>Trackerr</title>
+    <link rel="stylesheet" href="/static/styles/pwdupdate.css" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+    </style>
 </head>
+
 <body>
-    <body class="font-mono bg-gray-400">
-		<!-- Container -->
-		<div class="container mx-auto">
-			<div class="flex justify-center px-6 my-12">
-				<!-- Row -->
-				<div class="w-full xl:w-3/4 lg:w-11/12 flex">
-					<!-- Col -->
-					<div
-						class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-						style="background-image: url('https://source.unsplash.com/oWTW-jNGl9I/600x800')"
-					></div>
-					<!-- Col -->
-					<div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
-						<div class="px-8 mb-4 text-center">
-							<h3 class="pt-4 mb-2 text-2xl">Forgot Your Password?</h3>
-							<p class="mb-4 text-sm text-gray-700">
-								We get it, stuff happens. Just enter your email address below and we'll send you a
-								link to reset your password!
-							</p>
-						</div>
-						<form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-							<div class="mb-4">
-								<label class="block mb-2 text-sm font-bold text-gray-700" for="email">
-									Email
-								</label>
-								<input
-									class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-									id="email"
-									type="email"
-									placeholder="Enter Email Address..."
-								/>
-							</div>
-							<div class="mb-6 text-center">
-								<button
-									class="w-full px-4 py-2 font-bold text-white bg-red-500 rounded-full hover:bg-red-700 focus:outline-none focus:shadow-outline"
-									type="button"
-								>
-									Reset Password
-								</button>
-							</div>
-							<hr class="mb-6 border-t" />
-							<div class="text-center">
-								<a
-									class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-									href="#"
-								>
-									Create an Account!
-								</a>
-							</div>
-							<div class="text-center">
-								<a
-									class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-									href="#"
-								>
-									Already have an account? Login!
-								</a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
-  <footer>
-    <p>Footer</p>
-  </footer>
+    <div class="div-container">
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="/static/image/Trakerr.jpeg" alt="Company Logo" width="100" height="50" class="logo" title="Our Company Logo">
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div>
+                <button class="login"><a href="./login.html">Login</a></button>
+                <button class="register">Register</button>
+            </div>
+        </nav>
+    </div>
+    <div class="my-form__wrapper">
+        <div class="login-welcome-row">
+            <h2>Password Update</h2>
+        </div>
+
+        <form class="my-form">
+            <div class="socials-col">
+                <label for="newPassword">New Password:</label>
+                <div class="password-input">
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <br>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <br>
+                <p id="passwordMessage" style="color: red;"></p>
+                <br>
+                
+                <button type="button" onclick="updatePassword()">Update Password</button>
+
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        function updatePassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const passwordMessage = document.getElementById('passwordMessage');
+
+            if (newPassword === confirmPassword) {
+                // Passwords match, you can proceed with the update
+                passwordMessage.style.color = 'green';
+                passwordMessage.textContent = 'Password updated successfully!';
+                // Add your password update logic here
+            } else {
+                // Passwords do not match
+                passwordMessage.style.color = 'red';
+                passwordMessage.textContent = 'Passwords do not match. Please try again.';
+            }
+        }
+
+        function showPassword() {
+            const newPasswordInput = document.getElementById("newPassword");
+            const confirmPasswordInput = document.getElementById("confirmPassword");
+
+            // Set the input type to "text" to show the password
+            newPasswordInput.type = "text";
+            confirmPasswordInput.type = "text";
+        }
+    </script>
+    <footer>
+        <small>
+            <a href="E-commerce">E-Commerce Solutions</a>
+            <p>© 2023 ALX Final Project · All Rights Reserved | <a href="privacy">Privacy</a> | <a href="#">About Us</a> | <a  href="#">Contact Us</a> | <a  href="home.html">Home</a>
+                
+        
+
+            </p>
+        </small>
+    </footer>
+
 </body>
+
 </html>
