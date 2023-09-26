@@ -56,7 +56,19 @@ $(document).ready(function () {
 
   // Event listener for the "Track" button
   $("#trackButton").click(function () {
-    let searchTerm = $("#searchInput").val().toLowerCase();
+    let searchTerm = $("#searchInput").val().trim().toLowerCase();
+
+    if (searchTerm === "") {
+      // Display a message below the input field to prompt the user to enter a tracking number
+      $("#searchInput").addClass("invalid");
+      $("#searchInput").attr("placeholder", "Please enter a tracking number");
+      return;
+    }
+
+    // Clear any previous error messages
+    $("#searchInput").removeClass("invalid");
+    $("#searchInput").attr("placeholder", "Enter your tracking number");
+
     // Call the function to perform the product search
     performProductSearch(searchTerm);
   });
