@@ -8,15 +8,23 @@ $(document).ready(function () {
     // Add more products as needed
   ];
 
+  // Function to initialize collapsible buttons
+  function initializeCollapsibleButtons() {
+    $(".collapsible-button").click(function () {
+      // Toggle the closest collapsible content within the same section
+      $(this).closest("section").find(".collapsible-content").slideToggle();
+    });
+  }
+
+  // Call the initialization function
+  initializeCollapsibleButtons();
+
   // Function to perform product search
   function performProductSearch(searchTerm) {
     // Clear previous search results and product details
     $("#searchResults").empty();
     $("#productDetails").empty();
 
-    // Simulate an AJAX GET request to retrieve product data
-    // In this case, there's no actual server request; we use the dummyData array
-    // Replace this with your actual AJAX request when using a real server
     let data = dummyData;
 
     // Process the received data (dummyData)
@@ -24,33 +32,21 @@ $(document).ready(function () {
       if (product.trackingNumber.toLowerCase().includes(searchTerm)) {
         // Display matching products within a section container
         let productHtml = `
-                    <section class="product-container"  data-product-id="${product.id}">
+                    <section class="product-container collapsible-container"  data-product-id="${product.id}">
                         
                         <div class="product-info">
                             <p>Tracking Number: ${product.trackingNumber}</p>
                             <p>Status: ${product.status}</p>
-                            <button class="detail-button">View details</button>
+                            <button class="detail-button collapsible-button" >View details</button>
+                            <div class="collapsible-content">
+                            <p>This is some hidden content that will be revealed when you press the button.</p>
+                            </div>
                         </div>
                     </section>
                 `;
+
         $("#searchResults").append(productHtml);
       }
-    });
-
-    // Add click event to "Track" buttons for more details
-    $(".track-button").click(function () {
-      // Get the product ID from the parent section's data attribute
-      let productId = $(this).closest("section").data("product-id");
-
-      // Simulate an AJAX GET request to fetch product details based on the productId
-      // Again, this is simulated; you should replace it with a real server request
-      let productDetails = getDummyProductDetails(productId);
-
-      // Display product details on a separate page or modal
-      let detailsHtml = `<h2>${productDetails.trackingNumber}</h2>`;
-      detailsHtml += `<p>Status: ${productDetails.status}</p>`;
-      // You can include more details as needed
-      $("#productDetails").html(detailsHtml);
     });
   }
 
@@ -60,12 +56,6 @@ $(document).ready(function () {
 
     // Redirect to the tracking status page with the tracking number as a URL parameter
     window.location.href = `./trackingStatus.html?trackingNumber=${trackingNumber}`;
-  });
-
-  // Add click event to "Track" buttons for more details
-  $(".view-details").click(function () {
-    // Get the product ID from the parent section's data attribute
-    let productId = $(this).closest("section").data("product-id");
   });
 
   // Event listener for the "Track" button
@@ -86,13 +76,5 @@ $(document).ready(function () {
     // Call the function to perform the product search
     performProductSearch(searchTerm);
   });
-
-  // Simulated function to get product details based on productId
-  function getDummyProductDetails(productId) {
-    // Simulated product details (replace with your actual data)
-    const productDetails = dummyData.find(
-      (product) => product.id === productId
-    );
-    return productDetails || {}; // Return an empty object if not found
-  }
 });
+1
