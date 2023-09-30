@@ -30,6 +30,33 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
     </style>
+    <style>
+      /* Add CSS for styling */
+      .collapsible-container {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .collapsible-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .collapsible-content {
+        display: none;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
     <nav>
@@ -133,6 +160,14 @@
       status.addEventListener("click", function () {
         // Redirect to the login page
         window.location.href = "./trackingStatus.html";
+      });
+    </script>
+    <script>
+      // jQuery script for toggling the content
+      $(document).ready(function () {
+        $(".collapsible-button").click(function () {
+          $(this).next(".collapsible-content").slideToggle();
+        });
       });
     </script>
   </body>

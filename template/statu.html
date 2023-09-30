@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collapsible Details</title>
+    <style>
+      /* Add CSS for styling */
+      .collapsible-container {
+        width: 300px;
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .collapsible-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .collapsible-content {
+        display: none;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="collapsible-container">
+      <button class="collapsible-button">Show Details</button>
+      <div class="collapsible-content">
+        <p>
+          This is some hidden content that will be revealed when you press the
+          button.
+        </p>
+      </div>
+    </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      // jQuery script for toggling the content
+      $(document).ready(function () {
+        $(".collapsible-button").click(function () {
+          $(this).next(".collapsible-content").slideToggle();
+        });
+      });
+    </script>
+  </body>
+</html>
