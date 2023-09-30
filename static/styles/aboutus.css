@@ -1,0 +1,62 @@
+body {
+    background-image: linear-gradient(to bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1,
+.duplicated-h1 {
+    font-size: 48px;
+    text-align: center;
+    color: #333;
+    /* Change the color to your preference */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.duplicated-h1 {
+    font-size: 80px;
+    color: transparent;
+    text-align: center;
+    /* Make text transparent */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Add the same text shadow as the original */
+    position: absolute;
+    top: 90%;
+    left: 35%;
+    z-index: -1;
+    /* Place the duplicated text behind the original */
+}
+
+
+/* Style for the duplicated h1 */
+
+h2 {
+    text-align: center;
+    display: block;
+    align-items: center;
+    color: black;
+}
+
+#team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: fit-content;
+}
+
+.author {
+    width: 20%;
+    margin: 10px;
+}
+
+.author img {
+    border-radius: 15%;
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    display: block;
+    margin-bottom: auto;
+    padding-top: 0%;
+}
