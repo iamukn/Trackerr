@@ -27,7 +27,7 @@ $(document).ready(function () {
                     <section class="product-container"  data-product-id="${product.id}">
                         
                         <div class="product-info">
-                            <p>Product: ${product.name}</p>
+                            <p>Tracking Number: ${product.trackingNumber}</p>
                             <p>Status: ${product.status}</p>
                             <button class="detail-button">View details</button>
                         </div>
@@ -53,6 +53,20 @@ $(document).ready(function () {
       $("#productDetails").html(detailsHtml);
     });
   }
+
+  //This script will redirect the user to the tracking status page
+  $("#detail-button").click(function () {
+    const trackingNumber = $("#searchInput").val().toLowerCase();
+
+    // Redirect to the tracking status page with the tracking number as a URL parameter
+    window.location.href = `./trackingStatus.html?trackingNumber=${trackingNumber}`;
+  });
+
+  // Add click event to "Track" buttons for more details
+  $(".view-details").click(function () {
+    // Get the product ID from the parent section's data attribute
+    let productId = $(this).closest("section").data("product-id");
+  });
 
   // Event listener for the "Track" button
   $("#trackButton").click(function () {

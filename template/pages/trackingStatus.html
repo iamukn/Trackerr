@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- Bootstrap JavaScript and Popper.js CDN Links (required for Bootstrap components) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #b39eb5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 auto;
+      }
+      .hh-grayBox {
+        background-color: #f8f8f8;
+        margin-bottom: 20px;
+        padding: 35px;
+        margin-top: 20px;
+      }
+      .pt45 {
+        padding-top: 45px;
+      }
+      .order-tracking {
+        text-align: center;
+        width: 33.33%;
+        position: relative;
+        display: block;
+      }
+      .order-tracking .is-complete {
+        display: block;
+        position: relative;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        border: 0px solid #afafaf;
+        background-color: green;
+        margin: 0 auto;
+        transition: background 0.25s linear;
+        -webkit-transition: background 0.25s linear;
+        z-index: 2;
+      }
+      .order-tracking .is-complete:after {
+        display: block;
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 7px;
+        top: -2px;
+        bottom: 0;
+        left: 5px;
+        margin: auto 0;
+        border: 0px solid #afafaf;
+        border-width: 0px 2px 2px 0;
+        transform: rotate(45deg);
+        opacity: 0;
+      }
+      .order-tracking.completed .is-complete {
+        border-color: #a753ff;
+        border-width: 0px;
+        background-color: #a753ff;
+      }
+      .order-tracking.completed .is-complete:after {
+        border-color: #fff;
+        border-width: 0px 3px 3px 0;
+        width: 7px;
+        left: 11px;
+        opacity: 1;
+      }
+      .order-tracking p {
+        color: #a4a4a4;
+        font-size: 16px;
+        margin-top: 8px;
+        margin-bottom: 0;
+        line-height: 20px;
+      }
+      .order-tracking p span {
+        font-size: 14px;
+      }
+      .order-tracking.completed p {
+        color: #000;
+      }
+      .order-tracking::before {
+        content: "";
+        display: block;
+        height: 3px;
+        width: calc(100% - 40px);
+        background-color: rgb(44, 178, 44);
+        top: 13px;
+        position: absolute;
+        left: calc(-50% + 20px);
+        z-index: 0;
+      }
+      .order-tracking:first-child:before {
+        display: none;
+      }
+      .order-tracking.completed:before {
+        background-color: #a753ff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container animate__animated animate__zoomInDown">
+      <div class="row">
+        <div class="col-12 col-md-10 hh-grayBox pt45 pb20">
+          <div class="row justify-content-between">
+            <div class="order-tracking completed">
+              <span class="is-complete"></span>
+              <p id="#shippedStatus">Shipped<br /><span id="#updateDate">Mon, June 24</span></p>
+            </div>
+            <div class="order-tracking completed">
+              <span class="is-complete"></span>
+              <p id="inTransitStatus">In Transit<br /><Tue, id="#updateDate">Tue, June 25</span></p>
+            </div>
+            <div class="order-tracking">
+              <span class="is-complete"></span>
+              <p id="deliveredStatus">Delivered<br /><span id="#updateDate">Fri, June 28</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        // Extract the tracking number from the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const trackingNumber = urlParams.get("trackingNumber");
+
+        if (trackingNumber) {
+          // Make an AJAX request to retrieve parcel details
+          $.ajax({
+            url: "/get-parcel-details", // Replace with your server endpoint
+            type: "GET",
+            data: { trackingNumber: trackingNumber },
+            dataType: "json",
+            success: function (data) {
+              if (data.status && data.updateDate) {
+                $("#updateDate").text(`Last Update Date: ${data.updateDate}`);
+                // Conditionally assign the status to a specific element
+                if (data.status === "Shipped") {
+                  $("#shippedStatus").text(`Status: ${data.status}`);
+                } else if (data.status === "In Transit") {
+                  $("#inTransitStatus").text(`Status: ${data.status}`);
+                } else if (data.status === "Delivered") {
+                  $("#deliveredStatus").text(`Status: ${data.status}`);
+                }
+              } else {
+                $("#updateDate").text("");
+                $("#shippedStatus").text("");
+                $("#inTransitStatus").text("");
+                $("#deliveredStatus").text("Parcel not not yet delivered");
+              }
+            },
+            error: function () {
+              $("#updateDate").text("");
+              $("#shippedStatus").text("");
+              $("#inTransitStatus").text("");
+              $("#deliveredStatus").text("Error fetching parcel details");
+            },
+          });
+        } 
+      });
+    </script>
+    <script>
+    $(document).ready(function () {
+      // Dummy data for testing without AJAX
+      const dummyParcel = {
+          status: "In Transit",
+          updateDate: "2023-10-01",
+      };
+  
+      // Assign dummy data to specific elements
+      $("#updateDate").text(`Last Update Date: ${dummyParcel.updateDate}`);
+      
+      if (dummyParcel.status === "Shipped") {
+          $("#shippedStatus").text(`Status: ${dummyParcel.status}`);
+      } else if (dummyParcel.status === "In Transit") {
+          $("#inTransitStatus").text(`Status: ${dummyParcel.status}`);
+      } else if (dummyParcel.status === "Delivered") {
+          $("#deliveredStatus").text(`Status: ${dummyParcel.status}`);
+      }
+  });
+  </script>
+  </body>
+</html>

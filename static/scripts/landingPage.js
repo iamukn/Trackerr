@@ -21,37 +21,28 @@ $(document).ready(function () {
           let productHtml = `
                       <section data-product-id="${product.id}">
                           <h3>My Parcel</h3>
-                          <div>
-                              <p>Product: ${product.name}</p>
-                              <p>Status: ${product.status}</p>
-                              <button class="view-details">View details</button>
-                          </div>
+                          <div class="product-info">
+                          <p>Tracking Number: ${product.trackingNumber}</p>
+                          <p>Status: ${product.status}</p>
+                          <button class="detail-button">View details</button>
+                      </div>
                       </section>
                   `;
           $("#searchResults").append(productHtml);
+        });
+
+        //This script will redirect the user to the tracking status page
+        $("#detail-button").click(function () {
+          const trackingNumber = $("#searchInput").val().toLowerCase();
+
+          // Redirect to the tracking status page with the tracking number as a URL parameter
+          window.location.href = `./trackingStatus.html?trackingNumber=${trackingNumber}`;
         });
 
         // Add click event to "Track" buttons for more details
         $(".view-details").click(function () {
           // Get the product ID from the parent section's data attribute
           let productId = $(this).closest("section").data("product-id");
-
-          // Perform an AJAX GET request to fetch product details based on the productId
-          $.ajax({
-            url: `get_product_details=${productId}`, // Replace with  server endpoint
-            method: "GET",
-            dataType: "json",
-            success: function (productDetails) {
-              // Display product details on a separate page or modal
-              let detailsHtml = `<h2>${productDetails.name}</h2>`;
-              detailsHtml += `<p>Status: ${productDetails.status}</p>`;
-
-              $("#productDetails").html(detailsHtml);
-            },
-            error: function (error) {
-              console.error("Error fetching product details:", error);
-            },
-          });
         });
       },
       error: function (error) {

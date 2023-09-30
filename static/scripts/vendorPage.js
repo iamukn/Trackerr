@@ -1,75 +1,71 @@
 $(document).ready(function () {
-  let generatedTrackingNumber = ""; // Initialize with an empty tracking number
+  let generatedTrackingNumber = "";
+  let userName = "";
 
-  // Event listener for the "Generate Tracking Number" button
-  $("#generateTrackingBtn").click(function () {
-    // Make an AJAX GET request to fetch a unique tracking number from the server
+  // Fetch User Name on Page Load
+  fetchUserName();
+
+  // Generate Tracking Number Button
+  $("#generateBtn").click(function () {
     $.ajax({
-      url: "backend_endpoint_for_tracking_number_generation", // Replace with your actual server endpoint
-      method: "GET",
-      dataType: "json",
+      url: "generate_tracking-number-API",
+      type: "GET",
       success: function (data) {
-        if (data.trackingNumber) {
-          // Store the generated tracking number
-          generatedTrackingNumber = data.trackingNumber;
-          // Display the generated tracking number
-          $("#trackingNumberDisplay").text(
-            `Tracking Number: ${generatedTrackingNumber}`
-          );
-        } else {
-          alert("Failed to generate tracking number. Please try again.");
-        }
+        // Retrieve the generated tracking number from the backend
+        generatedTrackingNumber = data.trackingNumber;
+        $("#trackingNumber").text(generatedTrackingNumber);
       },
-      error: function (error) {
-        console.error("Error generating tracking number:", error);
+      error: function () {
+        alert("Failed to generate tracking number.");
       },
     });
   });
 
-  // Event listener for the tracking form submission
-  $("#trackingForm").submit(function (event) {
+  // Function to fetch the user's name on page load
+  function fetchUserName() {
+    $.ajax({
+      url: "API-to-generate-username",
+      type: "GET",
+      success: function (data) {
+        userName = data.name;
+
+        $("#userName").text(userName);
+      },
+    });
+  }
+
+  // Update Tracking Status Form Submission
+  $("#updateStatusForm").submit(function (event) {
     event.preventDefault();
 
-    // Get form data
-    let productName = $("#productName").val();
-    let productDescription = $("#productDescription").val();
-    let status = $("#status").val();
+    // Get input values
+    let updateTrackingNumber = $("#updateTrackingNumberInput").val();
+    let updatedStatus = $("#updatedStatusSelect").val();
 
-    // Create a tracking object
-    let trackingData = {
-      productName: productName,
-      productDescription: productDescription,
-      status: status,
-      trackingNumber: generatedTrackingNumber, // Include the generated tracking number
+    // Check if the tracking number has been registered
+    if (updateTrackingNumber !== generatedTrackingNumber) {
+      $("#updateFeedback").text("Tracking number not registered.");
+      return;
+    }
+
+    // Prepare data for AJAX POST request
+    let postData = {
+      trackingNumber: updateTrackingNumber,
+      status: updatedStatus,
     };
 
-    // Make an AJAX POST request to send tracking data to the server for database insertion
+    // Send AJAX POST request to update tracking status
     $.ajax({
-      url: "backend_endpoint_for_data_insertion", // Replace with your actual server endpoint
-      method: "POST",
-      data: JSON.stringify(trackingData),
-      contentType: "application/json",
-      dataType: "json",
-      success: function (response) {
-        if (response.success) {
-          // Show success message
-          $("#successMessage").removeClass("hidden");
-
-          // Clear form fields
-          $("#productName").val("");
-          $("#productDescription").val("");
-          $("#status").val("Shipped");
-
-          // Hide success message after 3 seconds
-          setTimeout(function () {
-            $("#successMessage").addClass("hidden");
-          }, 3000);
-        } else {
-          alert("Failed to submit tracking data. Please try again.");
-        }
+      url: "update_tracking_API",
+      type: "POST",
+      data: postData,
+      success: function () {
+        $("#updateFeedback").text(
+          `Updated Status for Tracking Number ${updateTrackingNumber}: ${updatedStatus}`
+        );
       },
-      error: function (error) {
-        console.error("Error submitting tracking data:", error);
+      error: function () {
+        alert("Failed to update tracking status.");
       },
     });
   });

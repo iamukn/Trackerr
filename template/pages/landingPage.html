@@ -21,7 +21,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <title>Trackerr</title>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <link rel="stylesheet" href="/Trackerr/static/styles/normalize.css" />
     <link rel="stylesheet" href="/Trackerr/static/styles/landingPage.css" />
     <style>
@@ -67,7 +70,7 @@
     </nav>
     <header>
       <div class="hearder-text">
-        <h1>TRACKERR</h1>
+        <h1 class="animate__animated animate__zoomInDown">TRACKERR</h1>
         <h2>Tracking your parcel is easy with us</h2>
       </div>
       <div class="search-section">
@@ -123,6 +126,13 @@
       login.addEventListener("click", function () {
         // Redirect to the login page
         window.location.href = "./login.html";
+      });
+    </script>
+    <script>
+      const status = document.getElementById("detail-button");
+      status.addEventListener("click", function () {
+        // Redirect to the login page
+        window.location.href = "./trackingStatus.html";
       });
     </script>
   </body>

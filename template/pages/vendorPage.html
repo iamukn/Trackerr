@@ -3,61 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parcel Tracking System - Vendor</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="/Trackerr/static/styles/normalize.css" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Trackerr is a parcel tracking system that help vendor to generate a tracking number and track thier parcels"
+    />
+    <meta
+      name="keywords"
+      content="track, tracking number, vendor, parcel, customer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>Trackerr</title>
     <link rel="stylesheet" href="/Trackerr/static/styles/vendorPage.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/normalize.css" />
     <link rel="stylesheet" href="/Trackerr/static/styles/commonStyle.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+    </style>
   </head>
   <body>
-    <div class="div-container">
-      <nav class="nav-bar">
-        <div class="logo">
-          <img
-            src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
-            alt="logo"
-            height="50px"
-            width="80px"
-            style="border-radius: 5px"
-          />
+    <nav>
+      <div class="div-container">
+        <div class="topnav" id="myTopnav">
+          <div class="nav-items">
+            <div>
+              <a href="#logo" class="active"
+                ><img
+                  width="70px"
+                  height="50px"
+                  src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
+                  alt="Logo"
+                  class="logo"
+              /></a>
+              <a href="#news" class="link">News</a>
+              <a href="#contact" class="link">Contact</a>
+              <a href="#about" class="link">About</a>
+
+              <a href=""><button>Logout</button></a>
+            </div>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"
+                ><img
+                  src="/Trackerr/static/assets/icons8-hamburger-button-50 (1).png"
+                  alt="Menu"
+                  style="background-color: white"
+                  class="menu"
+                  width="45px"
+                  height="50px"
+              /></i>
+            </a>
+          </div>
         </div>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <div>
-          <a href="./login.html"><button class="login">Logout</button></a>
-        </div>
-      </nav>
-    </div>
-    <main>
-      <div class="container">
-        <h1>Vendor Tracking System</h1>
-        <button id="generateTrackingBtn">Generate Tracking Number</button>
+      </div>
+    </nav>
 
-        <p id="trackingNumberDisplay"></p>
-        <form id="trackingForm">
-          <label for="productName">Product Name:</label>
-          <input type="text" id="productName" required />
+    <main class="container">
+      <!-- Generate Tracking Number Section -->
+      <p id="userName">welcome Hamza</p>
+      <section class="section">
+        <h2>Generate Tracking Number</h2>
+        <button id="generateBtn">Generate</button>
+        <p>Generated Tracking Number: <span id="trackingNumber"></span></p>
+      </section>
 
-          <label for="productDescription">Product Description:</label>
-          <textarea id="productDescription" required></textarea>
-
-          <label for="status">Status:</label>
-          <select id="status">
+      <!-- Update Tracking Status Section -->
+      <section class="section">
+        <h2>Update Tracking Status</h2>
+        <form id="updateStatusForm">
+          <label for="updateTrackingNumberInput">Tracking Number:</label>
+          <input type="text" id="updateTrackingNumberInput" required />
+          <label for="updatedStatusSelect">Status:</label>
+          <select id="updatedStatusSelect">
             <option value="Shipped">Shipped</option>
             <option value="In Transit">In Transit</option>
             <option value="Delivered">Delivered</option>
           </select>
-
-          <button class="vendor-submit" type="submit">Submit</button>
+          <button type="submit">Submit</button>
         </form>
-      </div>
-
-      <div id="successMessage" class="hidden">
-        <p>Tracking information submitted successfully!</p>
-      </div>
+        <div class="feedback" id="updateFeedback"></div>
+      </section>
     </main>
     <footer>
       <small>
@@ -69,7 +101,62 @@
       </small>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="/Trackerr/static/scripts/vendorPage.js"></script>
+    <script>
+      $(document).ready(function () {
+        let generatedTrackingNumber = "";
+
+        // Generate Tracking Number Button (Random Data)
+        $("#generateBtn").click(function () {
+          // Simulate generating a random tracking number
+          generatedTrackingNumber = generateRandomTrackingNumber();
+          $("#trackingNumber").text(generatedTrackingNumber);
+        });
+
+        // Update Tracking Status Form Submission (Dummy Data)
+        $("#updateStatusForm").submit(function (event) {
+          event.preventDefault();
+
+          // Get input values
+          let updateTrackingNumber = $("#updateTrackingNumberInput").val();
+          let updatedStatus = $("#updatedStatusSelect").val();
+
+          // Check if the tracking number has been registered
+          if (updateTrackingNumber !== generatedTrackingNumber) {
+            $("#updateFeedback").text("Tracking number not registered.");
+            return;
+          }
+
+          // Simulate displaying feedback message
+          $("#updateFeedback").text(
+            `Updated Status for Tracking Number ${updateTrackingNumber}: ${updatedStatus}`
+          );
+        });
+
+        // Function to generate a random tracking number
+        function generateRandomTrackingNumber() {
+          const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          let trackingNumber = "";
+          for (let i = 0; i < 10; i++) {
+            trackingNumber += chars.charAt(
+              Math.floor(Math.random() * chars.length)
+            );
+          }
+          return trackingNumber;
+        }
+      });
+    </script>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+    </script>
     <script>
       document.getElementById("year").innerHTML = new Date().getFullYear();
     </script>
