@@ -123,6 +123,17 @@ def tracking_(num):
         else:
             return redirect(url_for("tracking"))
 
+# Tracking info update route
+@app.route('/dashboard/tracking/update', methods=['PUT', 'GET'])
+def trackinfo_update():
+    if g.user:
+        if request.method == 'PUT':
+            trackNum = request.form.get('tracking')
+            status = request.form.get('status')
+            return track.update_tracking(tracknum, status)
+        elif request.method == 'GET':
+            return render_template('updateTracking.htm')
+    abort(403, 'Unauthorized')
 
 @app.route("/signup", strict_slashes=False, methods=["GET", "POST"])
 def signup():

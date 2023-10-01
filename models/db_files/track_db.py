@@ -72,6 +72,7 @@ class Tracking:
                     {"tracking_number": tracking.upper()},
                     {"$set": {"status1": status, "updated_on": f"{date}-{time}"}},
                 )
+                return True
             elif (
                 data.get("status1") == "in transit"
                 and status.lower() == "delivered"
@@ -81,6 +82,7 @@ class Tracking:
                     {"tracking_number": tracking.upper()},
                     {"$set": {"status2": status, "updated_on": f"{date}-{time}"}},
                 )
+                return True
             else:
                 return "Enter a Valid tracking number"
         except Exception:
