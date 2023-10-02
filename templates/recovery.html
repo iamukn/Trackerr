@@ -1,9 +1,0 @@
-<h1>Forgotten password</h1>
-
-<form action={{url_for('recover')}} method='post'>
-    <input type='text' name='email' required>
-    <p>{{msg}}</p>
-    <input type='submit'>
-</form>
-
-<a href={{url_for('signup')}}>Sign Up</a>
