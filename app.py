@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Python flask route """
 
-from flask import Flask, abort, render_template, request, redirect, session, g, url_for
+from flask import Flask, jsonify, abort, render_template, request, redirect, session, g, url_for
 from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
@@ -94,20 +94,29 @@ def login():
 @app.route("/tracking", methods=["GET", "POST"], strict_slashes=False)
 def tracking():
     if request.method == "POST":
-        tracking_num = request.form["tracking"]
+        tracking_num = request.json.get("tracking")
         res = track.tracker(str(tracking_num.upper()))
-        s1 = res.get("status1")
-        s2 = res.get("status2")
-        if s1 and s2:
-            return render_template(
-                "tracking_info2.html", num=tracking_num, s1=s1, s2=s2
-            )
-        elif s1:
-            return render_template("tracking_info.html", num=tracking_num, s1=s1)
-        else:
-            return redirect(url_for("tracking"))
-    else:
-        return render_template("tracking.html")
+        data = {}
+        for key, val in res.items():
+            if key == '_id':
+                pass
+            else:
+                data[key] = res.get(key)
+        return jsonify(data)
+
+
+     #   s1 = res.get("status1")
+     #   s2 = res.get("status2")
+     #   if s1 and s2:
+     #       return render_template(
+     #           "tracking_info2.html", num=tracking_num, s1=s1, s2=s2
+     #       )
+     #   elif s1:
+     #       return render_template("tracking_info.html", num=tracking_num, s1=s1)
+     #   else:
+     #       return redirect(url_for("tracking"))
+  #  else:
+  #      return render_template("tracking.html")
 
 
 @app.route("/tracking/<num>", methods=["GET", "POST"], strict_slashes=False)
