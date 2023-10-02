@@ -122,8 +122,8 @@ class UserInfo:
         """Method that validates the login in the database using email or username"""
         password = password
         if login and password:
-            data = reg.find_one({"Username": login})
-            data2 = reg.find_one({"Email": login})
+            data = reg.find_one({"Username": login.lower()})
+            data2 = reg.find_one({"Email": login.lower()})
             if data:
                 res = data.get("Username")
                 if checkpw(password.encode(), data.get("password")):
@@ -148,8 +148,8 @@ class UserInfo:
         otp = otp.decode()
         try:
             # check to see if the email is in the database
-            if reg.find_one({"Email": rec_email}):
-                reg.update_one({"Email": rec_email}, {"$set": {"password": temp_pass}})
+            if reg.find_one({"Email": rec_email.lower()}):
+                reg.update_one({"Email": rec_email.lower()}, {"$set": {"password": temp_pass}})
                 # sends email to the customer with their otp
 
                 email_addr = os.getenv("email")

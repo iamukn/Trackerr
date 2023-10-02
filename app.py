@@ -73,8 +73,8 @@ def home():
 def login():
     """Login form page"""
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.json.get("username")
+        password = request.json.get("password")
 
         # checks the username and password in the database
         if db.auth(username, password):
@@ -128,9 +128,11 @@ def tracking_(num):
 def trackinfo_update():
     if g.user:
         if request.method == 'PUT':
-            trackNum = request.form.get('tracking')
-            status = request.form.get('status')
-            return track.update_tracking(tracknum, status)
+            trackNum = request.json.get('tracking')
+            status = request.json.get('status')
+            print(trackNum, status)
+            track.update_tracking(trackNum, status)
+            return "Updated successfully"
         elif request.method == 'GET':
             return render_template('updateTracking.htm')
     abort(403, 'Unauthorized')
@@ -189,7 +191,7 @@ def generate():
     if g.user:
         """method that generates a tracking number"""
         tracking_number = track.generate(session.get("user"))
-        return tracking_number
+        return jsonify({"tracking_number":tracking_number})
 
 
 @app.route("/recovery", methods=["GET", "POST"], strict_slashes=False)
@@ -202,14 +204,14 @@ def recover():
     return render_template("recovery.html")
 
 
-@app.route("/dashboard/reset", methods=["GET", "POST"], strict_slashes=False)
+@app.route("/dashboard/reset", methods=["GET", "PUT"], strict_slashes=False)
 def reset():
     """Method that changes password"""
     if request.method == "PUT":
-        if g.user:
+        if not g.user:
             username = session["user"]
-            oldPw = request.form["oldPw"]
-            newPw = request.form["newPw"]
+            oldPw = request.json.get('oldPw')
+            newPw = request.json.get('newPw')
             if db.pwUpdate(username, oldPw, newPw):
                 return render_template(
                     "updatePassword.htm", res="Password changed successfully"
@@ -229,6 +231,8 @@ def logout():
         """ends the session"""
         session.pop("user", None)
         return redirect(url_for("home"))
+    else:
+        abort(403)
 
 
 # This routes executes before any requests
