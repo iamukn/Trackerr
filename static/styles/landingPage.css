@@ -164,7 +164,12 @@ header {
 
 .product-info {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.item {
+  flex: 0 0 33.33%;
 }
 .product-name {
   font-weight: bolder;
@@ -173,6 +178,9 @@ header {
   font-size: small;
   width: 8rem;
   height: 2rem;
+  flex: 0 0 calc(10% - 10px);
+  margin-top: 0%;
+  border: none;
 }
 .status {
   font-style: italic;
@@ -285,8 +293,8 @@ footer {
 }
 
 .topnav .link:hover {
-  background-color: #ddd;
-  color: black;
+  text-decoration: underline;
+  color: #b39eb5;
 }
 .topnav .link {
   margin-left: 0;

@@ -8,17 +8,6 @@ $(document).ready(function () {
     // Add more products as needed
   ];
 
-  // Function to initialize collapsible buttons
-  function initializeCollapsibleButtons() {
-    $(".collapsible-button").click(function () {
-      // Toggle the closest collapsible content within the same section
-      $(this).closest("section").find(".collapsible-content").slideToggle();
-    });
-  }
-
-  // Call the initialization function
-  initializeCollapsibleButtons();
-
   // Function to perform product search
   function performProductSearch(searchTerm) {
     // Clear previous search results and product details
@@ -32,25 +21,53 @@ $(document).ready(function () {
       if (product.trackingNumber.toLowerCase().includes(searchTerm)) {
         // Display matching products within a section container
         let productHtml = `
-                    <section class="product-container collapsible-container"  data-product-id="${product.id}">
-                        
-                        <div class="product-info">
-                            <p>Tracking Number: ${product.trackingNumber}</p>
-                            <p>Status: ${product.status}</p>
-                            <button class="detail-button collapsible-button" >View details</button>
-                            <div class="collapsible-content">
-                            <p>This is some hidden content that will be revealed when you press the button.</p>
-                            </div>
-                        </div>
-                    </section>
-                `;
+          
+          <div class="product-container collapsible-container" data-product-id="${product.id}">
+          <div class="product-info">
+              
+              <p  class="item">Tracking Number: ${product.trackingNumber}</p>
+              <p class="item">Status: ${product.status}</p>
+              <button class="detail-button collapsible-button item">View details</button>
+              <div class="collapsible-content item">
+              <div class="container animate__animated animate__zoomInDown">
+              <div class="row">
+                <div class="col-12 col-md-10 hh-grayBox pt45 pb20">
+                  <div class="row justify-content-between">
+                    <div class="order-tracking completed">
+                      <span class="is-complete"></span>
+                      <p id="#shippedStatus">Shipped<br /><span id="#updateDate">Mon, June 24</span></p>
+                    </div>
+                    <div class="order-tracking completed">
+                      <span class="is-complete"></span>
+                      <p id="inTransitStatus">In Transit<br /><Tue, id="#updateDate">Tue, June 25</span></p>
+                    </div>
+                    <div class="order-tracking">
+                      <span class="is-complete"></span>
+                      <p id="deliveredStatus">Delivered<br /><span id="#updateDate">Fri, June 28</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
+              
+            </div>
+           
+              
+            </div>
+        `;
 
         $("#searchResults").append(productHtml);
       }
     });
+
+    // Add click event to make "Show Details" buttons collapsible
+    $(".collapsible-button").click(function () {
+      $(this).next(".collapsible-content").slideToggle();
+    });
   }
 
-  //This script will redirect the user to the tracking status page
+  // This script will redirect the user to the tracking status page
   $("#detail-button").click(function () {
     const trackingNumber = $("#searchInput").val().toLowerCase();
 
@@ -77,4 +94,3 @@ $(document).ready(function () {
     performProductSearch(searchTerm);
   });
 });
-1
