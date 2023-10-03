@@ -13,29 +13,30 @@ $(document).ready(function () {
       );
       return;
     }
-    // Clear any previous error messages
+ 
     $("#searchInput").removeClass("invalid");
     $("#searchInput").attr("placeholder", "Enter your tracking number");
-
     // Clear previous search results
     $("#searchResults").empty();
-
+    
     // Perform an AJAX GET request to retrieve parcel data from the server
     $.ajax({
-      url: "http://127.0.0.1:5000/",
+      url: "/",
       method: "POST",
       dataType: "json",
-      data: { searchTerm: searchTerm }, // Pass the search term to the server
-      success: function (data) {
+      contentType: "application/json",
+      data: JSON.stringify({ search: searchTerm }), // Pass the search term to the server
+     success: function (data) {
+         console.log(data);
+        
         // Process the received data
-        data.forEach(function (product) {
           // Display matching products within a section container
           let productHtml = `
           <div class="product-container collapsible-container" data-product-id="${product.tracking_number}">
           <div class="product-info">
               
-              <p  class="item">Tracking Number: ${product.tracking_number}</p>
-              <p class="item">Status: ${product.status1}</p>
+              <p  class="item">Tracking Number: ${data.tracking_number}</p>
+              <p class="item">Status: ${data.status1}</p>
               <button class="detail-button collapsible-button item">View details</button>
               <div class="collapsible-content item">
               <div class="container animate__animated animate__zoomInDown">
@@ -44,15 +45,15 @@ $(document).ready(function () {
                   <div class="row justify-content-between">
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
-                      <p id="#shippedStatus">Shipped<br /><span id="#updateDate">Mon, June 24</span></p>
+                      <p id="shippedStatus">Shipped<br /><span id="updateDate">Mon, June 24</span></p>
                     </div>
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
-                      <p id="inTransitStatus">In Transit<br /><Tue, id="#updateDate">Tue, June 25</span></p>
+                      <p id="inTransitStatus">In Transit<br /><Tue, id="updateDate">Tue, June 25</span></p>
                     </div>
                     <div class="order-tracking">
                       <span class="is-complete"></span>
-                      <p id="deliveredStatus">Delivered<br /><span id="#updateDate">Fri, June 28</span></p>
+                      <p id="deliveredStatus">Delivered<br /><span id="updateDate">Fri, June 28</span></p>
                     </div>
                   </div>
                 </div>
@@ -66,7 +67,6 @@ $(document).ready(function () {
             </div>
           `;
           $("#searchResults").append(productHtml);
-        });
 
         // Add click event to make "Show Details" buttons collapsible
         $(".collapsible-button").click(function () {

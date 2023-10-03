@@ -23,8 +23,10 @@ $(document).ready(function () {
     // Send an AJAX POST request to the server
     $.ajax({
       type: "POST",
-      url: "submit_contact_API",
-      data: data,
+      url: "/contactus",
+      data: JSON.stringify(data),
+      dataType: "json",
+      contentType: "application/json"
       success: function (response) {
         // Handle the server's response
         if (response === "success") {
