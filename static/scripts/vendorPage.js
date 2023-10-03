@@ -8,11 +8,11 @@ $(document).ready(function () {
   // Generate Tracking Number Button
   $("#generateBtn").click(function () {
     $.ajax({
-      url: "generate_tracking-number-API",
+      url: "http://127.0.0.1/dashboard/generate",
       type: "GET",
       success: function (data) {
         // Retrieve the generated tracking number from the backend
-        generatedTrackingNumber = data.trackingNumber;
+        generatedTrackingNumber = data.tracking_number;
         $("#trackingNumber").text(generatedTrackingNumber);
       },
       error: function () {
@@ -56,7 +56,7 @@ $(document).ready(function () {
 
     // Send AJAX POST request to update tracking status
     $.ajax({
-      url: "update_tracking_API",
+      url: "http://127.0.0.1/dashboard/tracking/update",
       type: "POST",
       data: postData,
       success: function () {
