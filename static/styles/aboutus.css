@@ -3,7 +3,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-style: oblique;
     padding: 0%;
-    height: 100vh;
 }
 
 a {
@@ -13,8 +12,8 @@ a {
 }
 
 h1,
-.duplicated-h1 {
-    font-size: 48px;
+h2 {
+    font-size: 20px;
     text-align: center;
     color: #333;
     /* Change the color to your preference */
@@ -35,14 +34,12 @@ h1,
     /* Place the duplicated text behind the original */
 }
 
-
-/* Style for the duplicated h1 */
-
 h2 {
-    text-align: center;
-    display: block;
-    align-items: center;
-    color: black;
+    background-color: lightgrey;
+    width: 300px;
+    border: 5px solid green;
+    padding: 50px;
+    margin: 20px;
 }
 
 #team {
@@ -55,6 +52,9 @@ h2 {
 .author {
     width: 20%;
     margin: 10px;
+    align-content: right;
+    display: block;
+    align-items: right;
 }
 
 .author img {
