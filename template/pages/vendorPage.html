@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="Trackerr is a parcel tracking system that help vendor to generate a tracking number and track thier parcels"
+    />
+    <meta
+      name="keywords"
+      content="track, tracking number, vendor, parcel, customer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>Trackerr</title>
+    <link rel="stylesheet" href="/Trackerr/static/styles/vendorPage.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/Trackerr/static/styles/commonStyle.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="div-container">
+        <div class="topnav" id="myTopnav">
+          <div class="nav-items">
+            <div>
+              <a href="#logo" class="active"
+                ><img
+                  width="70px"
+                  height="50px"
+                  src="/Trackerr/static/login-02/assets/trackerr-logo.jpg"
+                  alt="Logo"
+                  class="logo"
+              /></a>
+
+              <a href="./contact.html" class="link">Contact</a>
+              <a href="./about.html" class="link">About</a>
+
+              <a href=""><button>Logout</button></a>
+            </div>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"
+                ><img
+                  src="/Trackerr/static/assets/icons8-hamburger-button-50 (1).png"
+                  alt="Menu"
+                  style="background-color: white"
+                  class="menu"
+                  width="45px"
+                  height="50px"
+              /></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <!-- Generate Tracking Number Section -->
+      <p id="userName">welcome Hamza</p>
+      <section class="section">
+        <h2>Generate Tracking Number</h2>
+        <button id="generateBtn">Generate</button>
+        <p>Generated Tracking Number: <span id="trackingNumber"></span></p>
+      </section>
+
+      <!-- Update Tracking Status Section -->
+      <section class="section">
+        <h2>Update Tracking Status</h2>
+        <form id="updateStatusForm">
+          <label for="updateTrackingNumberInput">Tracking Number:</label>
+          <input type="text" id="updateTrackingNumberInput" required />
+          <label for="updatedStatusSelect">Status:</label>
+          <select id="updatedStatusSelect">
+            <option value="Shipped">Shipped</option>
+            <option value="In Transit">In Transit</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+          <button type="submit">Submit</button>
+        </form>
+        <div class="feedback" id="updateFeedback"></div>
+      </section>
+    </main>
+    <footer>
+      <small>
+        <a href="E-commerce">E-Commerce Solutions</a>
+        <p>
+          © <span id="year"></span> ALX Final Project · All Rights Reserved |
+          <a href="privacy">Privacy</a>
+        </p>
+      </small>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="/Trackerr/static/scripts/vendorPage.js"></script>
+    <script>
+      $(document).ready(function () {
+        let generatedTrackingNumber = "";
+
+        // Generate Tracking Number Button (Random Data)
+        $("#generateBtn").click(function () {
+          // Simulate generating a random tracking number
+          generatedTrackingNumber = generateRandomTrackingNumber();
+          $("#trackingNumber").text(generatedTrackingNumber);
+        });
+
+        // Update Tracking Status Form Submission (Dummy Data)
+        $("#updateStatusForm").submit(function (event) {
+          event.preventDefault();
+
+          // Get input values
+          let updateTrackingNumber = $("#updateTrackingNumberInput").val();
+          let updatedStatus = $("#updatedStatusSelect").val();
+
+          // Check if the tracking number has been registered
+          if (updateTrackingNumber !== generatedTrackingNumber) {
+            $("#updateFeedback").text("Tracking number not registered.");
+            return;
+          }
+
+          // Simulate displaying feedback message
+          $("#updateFeedback").text(
+            `Updated Status for Tracking Number ${updateTrackingNumber}: ${updatedStatus}`
+          );
+        });
+
+        // Function to generate a random tracking number
+        function generateRandomTrackingNumber() {
+          const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+          let trackingNumber = "";
+          for (let i = 0; i < 10; i++) {
+            trackingNumber += chars.charAt(
+              Math.floor(Math.random() * chars.length)
+            );
+          }
+          return trackingNumber;
+        }
+      });
+    </script>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+    </script>
+    <script>
+      document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
+
+    <script>
+      const login = document.getElementById("login");
+      login.addEventListener("click", function () {
+        // Redirect to the login page
+        window.location.href = "./login.html";
+      });
+    </script>
+  </body>
+</html>
