@@ -5,11 +5,12 @@ from flask import Flask, jsonify, abort, render_template, request, redirect, ses
 from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
+from models.py_files.welcome_msg import contact_us
 from models.py_files.welcome_msg import email as email_msg
 from models.db_files.track_db import Tracking
 
 try:
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder="template/pages")
     cors = CORS(app)
     app.secret_key = os.urandom(24)
     db = UserInfo()
@@ -59,14 +60,14 @@ def service_unavailable(e):
 @app.route("/", strict_slashes=False, methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        track_num = request.form["tracking"]
+        track_num = request.json.get("search")
         return redirect(url_for("tracking_", num=str(track_num.upper())))
 
     """site count and landing page route """
     if g.user:
-        return render_template("index.html")
+        return render_template("landingPage.html")
     track.site_traffic()
-    return render_template("index.html")
+    return render_template("landingPage.html")
 
 
 @app.route("/login", strict_slashes=False, methods=["GET", "POST"])
@@ -123,23 +124,21 @@ def tracking():
 def tracking_(num):
     if num:
         res = track.tracker(num)
-        s1 = res.get("status1")
-        s2 = res.get("status2")
-        if s1 and s2:
-            return render_template("tracking_info2.html", num=num, s1=s1, s2=s2)
-        elif s1:
-            return render_template("tracking_info.html", num=num, s1=s1)
-        else:
-            return redirect(url_for("tracking"))
+        data = {}
+        for key, val in res.items():
+            if key == '_id':
+                pass
+            else:
+                data[key] = res.get(key)
+        return jsonify(data)
 
 # Tracking info update route
 @app.route('/dashboard/tracking/update', methods=['PUT', 'GET'])
 def trackinfo_update():
     if g.user:
         if request.method == 'PUT':
-            trackNum = request.json.get('tracking')
+            trackNum = request.json.get('trackingNumber')
             status = request.json.get('status')
-            print(trackNum, status)
             track.update_tracking(trackNum, status)
             return "Updated successfully"
         elif request.method == 'GET':
@@ -190,7 +189,7 @@ def signup():
 def dashboard():
     """checks if the user is in the session and serves him his dashboard"""
     if g.user:
-        return render_template("dashboard.html", user=session["user"])
+        return render_template("vendorPage.html", user=session["user"])
     abort(403, "Unauthorized")
 
 
@@ -233,6 +232,19 @@ def reset():
             return render_template("updatePassword.htm")
         abort(403, "Unauthorized")
 
+@app.route('/contactus', methods=['GET', 'POST'])
+def contactus():
+    """ contact us """
+    if request.method == 'POST':
+        name = request.json.get('name')
+        email = request.json.get('email')
+        msg = request.json.get('message')
+        # forwards the message to the team
+        contact_us(name=name,email=email, msg=msg)
+        return jsonify({"status": "200"})
+    else:
+        return render_template('contact.html')
+        
 
 @app.route("/logout", strict_slashes=False)
 def logout():

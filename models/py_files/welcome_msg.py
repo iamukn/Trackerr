@@ -26,3 +26,14 @@ def email(email: str, user: str) -> None:
             headers=headers,
             contents=f"Hello {user} \n" + data,
         )
+
+def contact_us(name: str, email: str, msg: str) -> None:
+    if not email:
+        return
+    sender = os.getenv("email")
+    pw = os.environ.get("password")
+    # registers the email and pw to keyframes
+    yagmail.register(sender, pw)
+    yag = yagmail.SMTP(sender)
+    headers = {"Reply-to": email}
+    yag.send(to='officialtrackerr@gmail.com', subject=f"Message from customer", headers=headers, contents=f"Hello from {name}, \n{msg}")
