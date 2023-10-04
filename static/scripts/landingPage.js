@@ -1,9 +1,9 @@
 $(document).ready(function () {
   // Event listener for the "Track" button
+ var res = "Enroute";
   $("#trackButton").click(function () {
     // Get the search term from the input field
     let searchTerm = $("#searchInput").val().toLowerCase();
-
     if (searchTerm === "") {
       // Display a message below the input field to prompt the user to enter a tracking number
       $("#searchInput").addClass("invalid");
@@ -31,12 +31,15 @@ $(document).ready(function () {
 
         // Process the received data from the server
         // Display matching products within a section container
+        if (!data.status1 == "in transit") {
+         res = "";
+        }
         let productHtml = `
           <div class="product-container collapsible-container" data-product-id="${data.tracking_number}">
           <div class="product-info">
               
               <p  class="item">Tracking Number: ${data.tracking_number}</p>
-              <p class="item">Status: ${data.status1}</p>
+              <p class="item">Status: ${data.status2.toUpperCase()}</p>
               <button class="detail-button collapsible-button item">View details</button>
               <div class="collapsible-content item">
               <div class="container animate__animated animate__zoomInDown">
@@ -45,15 +48,15 @@ $(document).ready(function () {
                   <div class="row justify-content-between">
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
-                      <p id="shippedStatus">Shipped<br /><span id="updateDate">Mon, June 24</span></p>
+                      <p id="shippedStatus">${data.status1.toUpperCase()}<br /><span id="updateDate">${data.created_on}-${data.time}</span></p>
                     </div>
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
-                      <p id="inTransitStatus">In Transit<br /><span id="updateDate">Tue, June 25</span></p>
+                      <p id="inTransitStatus"><br />${res}<span id="updateDate"></span></p>
                     </div>
                     <div class="order-tracking">
                       <span class="is-complete"></span>
-                      <p id="deliveredStatus">Delivered<br /><span id="updateDate">Fri, June 28</span></p>
+                      <p id="deliveredStatus">${data.status2.toUpperCase()}<br /><span id="updateDate">${data.updated_on}</span></p>
                     </div>
                   </div>
                 </div>
@@ -74,6 +77,7 @@ $(document).ready(function () {
         });
       },
       error: function (error) {
+        alert("You've enter an invalid tracking number", error);
         console.error("Error fetching data:", error);
       },
     });
