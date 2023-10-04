@@ -29,7 +29,7 @@ $(document).ready(function () {
       success: function (data) {
         console.log(data);
 
-        // Process the received data
+        // Process the received data from the server
         // Display matching products within a section container
         let productHtml = `
           <div class="product-container collapsible-container" data-product-id="${data.tracking_number}">
@@ -49,7 +49,7 @@ $(document).ready(function () {
                     </div>
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
-                      <p id="inTransitStatus">In Transit<br /><Tue, id="updateDate">Tue, June 25</span></p>
+                      <p id="inTransitStatus">In Transit<br /><span id="updateDate">Tue, June 25</span></p>
                     </div>
                     <div class="order-tracking">
                       <span class="is-complete"></span>
