@@ -104,6 +104,7 @@ def tracking():
             else:
                 data[key] = res.get(key)
         return jsonify(data)
+    return render_template('landingPage.html')
 
 
      #   s1 = res.get("status1")
