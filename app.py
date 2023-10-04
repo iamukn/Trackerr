@@ -184,7 +184,7 @@ def signup():
         finally:
             return redirect(url_for("login"))
     else:
-        return render_template("signup.html")
+        return render_template("register.html")
 
 
 @app.route("/dashboard", strict_slashes=False)

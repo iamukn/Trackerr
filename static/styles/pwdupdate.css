@@ -1,0 +1,164 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+    transition: 0.5s;
+}
+
+@keyframes overflow {
+    0% {
+        overflow: hidden;
+    }
+    100% {
+        overflow: hidden;
+    }
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(to bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b39eb5;
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav {
+    color: #fff;
+    padding: 10px 0;
+    margin-left: 4%;
+    margin-right: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.div-container {
+    background-color: #333;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    margin: 10px;
+    color: white;
+}
+
+button {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    height: 35px;
+    color: white;
+    background-color: #a753ff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b39eb5;
+}
+
+input {
+    width: 600px;
+    height: 45px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.my-form__wrapper {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-welcome-row {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.my-form {
+    margin: 10px;
+}
+
+.socials-col {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+}
+
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.toggle-password {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
