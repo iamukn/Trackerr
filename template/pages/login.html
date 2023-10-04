@@ -4,224 +4,135 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reset Password</title>
-    <link rel="stylesheet" href="../static/styles/normalize.css" />
-
     <style>
+              body {
+                font-family: Arial, sans-serif;
+                background-color: #f5f5f5;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
 
-      body {
-          font-family: Arial, sans-serif;
-          background-color: #f5f5f5;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
 
+              }
 
-        }
+              main {
+                background-color: #fff;
+                padding: 50px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
 
-        main {
-          background-color: #fff;
-          padding: 50px;
-          border-radius: 8px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          width: 100%;
-          max-width: 400px;
+                margin: 50px;
+              }
 
-          margin: 50px;
-        }
+              h2 {
+                font-size: small;
+                margin-bottom: 20px;
+              }
 
-        h2 {
-          font-size: small;
-          margin-bottom: 20px;
-        }
+              label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 8px;
+              }
+              input[type="password"],
+              input[type="email"] {
+                width: 80%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+              }
+              input[type="email"]:focus {
+                background-color: #eae7ed;
+              }
 
-        label {
-          font-weight: bold;
-          display: block;
-          margin-bottom: 8px;
-        }
-        input[type="password"],
-        input[type="email"] {
-          width: 80%;
-          padding: 10px;
-          margin-bottom: 20px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 16px;
-        }
-        input[type="email"]:focus {
-          background-color: #eae7ed;
-        }
+              button[type="submit"] {
+                background-color: #a753ff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+               width: 90%;
+              }
 
-        button[type="submit"] {
-          background-color: #a753ff;
-          color: #fff;
-          border: none;
-          padding: 10px 20px;
-          border-radius: 4px;
-          font-size: 16px;
-          cursor: pointer;
-          width: 90%;
-        }
+              button[type="submit"]:hover {
+                background-color: #b39eb5;
+              }
 
-        button[type="submit"]:hover {
-          background-color: #b39eb5;
-        }
-
-        #message {
+      #message {
           font-size: 14px;
           color: green;
           margin-top: 10px;
-        }
-        .my-form__actions {
+              }
+       .my-form__actions {
           display: flex;
           flex-direction: column;
           color:#1d1d1d;
           gap: 16px;
           margin-top: 8px;
-      }
+        }
 
-      .my-form__actions a {
+        .my-form__actions a {
           color: #1d1d1d
           font-weight: 600;
           text-decoration: none;
-      }
+        }
 
-      .my-form__actions a:hover {
+        .my-form__actions a:hover {
           text-decoration: underline;
-      }
+        }
 
-      .my-form__row {
+        .my-form__row {
           display: flex;
 
-      }
+        }
 
-      .my-form__signup {
+        .my-form__signup {
           display: flex;
           justify-content: center;
-      }
+        }
 
-      .my-form__signup a {
+        .my-form__signup a {
           color: #a753ff;
           font-weight: 800;
           text-decoration: none;
           font-size: 18px;
-      }
+        }
 
-      .my-form__signup a:hover {
+        .my-form__signup a:hover {
           text-decoration: underline;
-      }
+        }
 
 
-      @media (max-width: 600px) {
-      main {
+        @media (max-width: 600px) {
+        main {
           max-width: 100%;
           border-radius: 0;
-      }
-      .my-form__row {
+            }
+        .my-form__row {
           display: block;
 
-      }
+        }
 
-      }
+          }
     </style>
   </head>
   <body>
-<<<<<<< HEAD
     <main>
       <a href="./landingPage.html">
-        <img src="../static/assets/back-svgrepo-com (3).svg" alt="home" />
+        <img src="../static/assets/back-svgrepo-com (3).svg" alt="" />
       </a>
       <div class="login-welcome-row">
         <h1>Welcome back to &#x1F44F;</h1>
         <p>Please enter your details!</p>
-=======
-    <div class="login-wrapper">
-      <div class="login-side">
-        <a href="/" title="Logo">
-          <img
-            class="logo"
-            src="../static/assets/chevron.svg"
-            alt="Logo"
-            style="transform: rotate(360deg)"
-          />
-        </a>
-        <div class="my-form__wrapper">
-          <div class="login-welcome-row">
-            <h1>Welcome back &#x1F44F;</h1>
-            <p>Please enter your details!</p>
-          </div>
-          <form action={{url_for('login')}} class="my-form" method='post'>
-            <div class="socials-row">
-              <a href="#" title="Use Google">
-                <img
-                  src="../static/login-02/assets/google.png"
-                  alt="Google"
-                />
-                Log in with Google
-              </a>
-            </div>
-            <div class="divider">
-              <div class="divider-line"></div>
-              Or
-              <div class="divider-line"></div>
-            </div>
-            <div class="text-field">
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Your Email"
-                required
-              />
-              <img
-                alt="Email Icon"
-                title="Email Icon"
-                src="../static/login-02/assets/email.svg"
-              />
-            </div>
-            <div class="text-field">
-              <label for="password">Password:</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Your Password"
-                title="Minimum 6 characters at 
-                                    least 1 Alphabet and 1 Number"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
-                required
-              />
-              <img
-                alt="Password Icon"
-                title="Password Icon"
-                src="../static/login-02/assets/password.svg"
-              />
-            </div>
-           <input type="submit" class="my-form__button" value="Login" />
-            <div class="my-form__actions">
-              <div class="my-form__row">
-                <span>Did you forget your password?</span>
-                <a href={{url_for('recover')}} title="Reset Password">
-                  Reset Password
-                </a>
-              </div>
-              <div class="my-form__signup">
-                  <a href={{url_for('signup')}} title="Create Account"> Register as Vendor</a>
-              </div>
-            </div>
-          </form>
-          <!-- dummy form -->
-          <form action='/login' method='post'>
-              <input name='email' type='email' />
-              <input name='password' type='password' />
-              <input value='login' type='submit' />
-          </form> 
-        </div>
->>>>>>> 8ad3caba17b111867099eb2bdf5155cacd9136c9
       </div>
       <form action="/recovery" method="post" id="resetPasswordForm">
         <label for="email">Email:</label>
