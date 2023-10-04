@@ -21,19 +21,6 @@ $(document).ready(function () {
     });
   });
 
-  // Function to fetch the user's name on page load
-  function fetchUserName() {
-    $.ajax({
-      url: "API-to-generate-username",
-      type: "GET",
-      success: function (data) {
-        userName = data.name;
-
-        $("#userName").text(userName);
-      },
-    });
-  }
-
   // Update Tracking Status Form Submission
   $("#updateStatusForm").submit(function (event) {
     event.preventDefault();
