@@ -198,7 +198,7 @@ def dashboard():
 # Route to generate tracking number
 @app.route("/dashboard/generate", strict_slashes=False)
 def generate():
-    if g.user:
+    if  g.user:
         """method that generates a tracking number"""
         tracking_number = track.generate(session.get("user"))
         return jsonify({"tracking_number":tracking_number})
@@ -257,7 +257,7 @@ def logout():
     if g.user:
         """ends the session"""
         session.pop("user", None)
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
     else:
         abort(403)
 
