@@ -13,12 +13,12 @@ $(document).ready(function () {
       );
       return;
     }
- 
+
     $("#searchInput").removeClass("invalid");
     $("#searchInput").attr("placeholder", "Enter your tracking number");
     // Clear previous search results
     $("#searchResults").empty();
-    
+
     // Perform an AJAX GET request to retrieve parcel data from the server
     $.ajax({
       url: "/",
@@ -26,13 +26,13 @@ $(document).ready(function () {
       dataType: "json",
       contentType: "application/json",
       data: JSON.stringify({ search: searchTerm }), // Pass the search term to the server
-     success: function (data) {
-         console.log(data);
-        
+      success: function (data) {
+        console.log(data);
+
         // Process the received data
-          // Display matching products within a section container
-          let productHtml = `
-          <div class="product-container collapsible-container" data-product-id="${product.tracking_number}">
+        // Display matching products within a section container
+        let productHtml = `
+          <div class="product-container collapsible-container" data-product-id="${data.tracking_number}">
           <div class="product-info">
               
               <p  class="item">Tracking Number: ${data.tracking_number}</p>
@@ -66,7 +66,7 @@ $(document).ready(function () {
               
             </div>
           `;
-          $("#searchResults").append(productHtml);
+        $("#searchResults").append(productHtml);
 
         // Add click event to make "Show Details" buttons collapsible
         $(".collapsible-button").click(function () {
