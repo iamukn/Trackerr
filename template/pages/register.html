@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image: linear-gradient(to bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+        }
+    </style>
+</head>
+<header>
+    <section>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <img src="../static/image/Trakerr.jpeg" alt="Company Logo" width="100" height="50" class="logo" title="Our Company Logo">
+            </div>
+            <div>
+                <section class="container">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/login" class="btn1">Login</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </nav>
+    </section>
+</header>
+
+<body>
+    <form action='/signup' method='post' class="row g-6 needs-validation" novalidate>
+        <h1 class="title-page">Vendor Registration Portal</h1>
+        <div class="col-md-6">
+            <label for="vendorName" class="form-label">Company Name</label>
+            <input type="text" name='companyName' class="form-control" id="vendorName" required>
+        </div>
+        <div class="col-md-6">
+            <label for="companyAddress" class="form-label">Company Address</label>
+            <textarea class="form-control" name='companyAddr' id="companyAddress" required></textarea>
+        </div>
+        <div class="col-md-6">
+            <label for="servicesDescription" class="form-label">Services Description</label>
+            <textarea class="form-control" name='service' id="servicesDescription" required></textarea>
+        </div>
+        <div class="col-md-3">
+            <label for="validationCustom04" class="form-label">Country</label>
+            <select class="form-select" name='country' id="validationCustom04" required>
+                <option selected disabled value="">Choose...</option>
+                <option value="Ghana">Ghana</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="South Africa">South Africa</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="Malawi">Malawi</option>
+                
+                <!-- Add other Nigerian states here -->
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid state.
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label for="validationCustom03" class="form-label">City</label>
+            <select class="form-select" name='city' id="validationCustom03" required>
+                <option selected disabled value="">Choose...</option>
+                <!-- City options will be dynamically loaded here based on the selected state -->
+            </select>
+            <div class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <label for="inputFirstname" class="form-label">First Name</label>
+            <input type="text" name="firstName" class="form-control" id="inputFirstname" required>
+        </div>
+        <div class="col-md-3">
+            <label for="inputLastname" class="form-label">Last Name</label>
+            <input type="text" name="lastName" class="form-control" id="inputLastname" required>
+        </div>
+        <div class="col-md-3">
+            <label for="inputphonenumber" class="form-label">Phone Number</label>
+            <input type="tel" name="phone" class="form-control" id="inputphonenumber" required>
+        </div>
+        <div class="col-md-3">
+            <label for="inputemail" class="form-label">Enter Email</label>
+            <input type="email" name="email" class="form-control" id="inputemail" required>
+        </div>
+        <div class="col-md-5">
+            <label for="inputusername" class="form-label">Username</label>
+            <input type="name" name="username" class="form-control" id="inputusername" required>
+        </div>
+        <div class="col-md-5">
+            <label for="inputpassword" class="form-label">Enter Password</label>
+            <input type="password" name="password" class="form-control" id="inputpassword" required>
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+
+    </form>
+    <div id="registrationSuccessMessage" class="alert alert-success" style="display: none;">
+        Registration successful.
+
+    </div>
+
+
+    <script src="/static/scripts/register.js"></script>
+
+    <footer>
+        <small>
+            <a href="E-commerce">E-Commerce Solutions</a>
+            <p>© 2023 ALX Final Project · All Rights Reserved | <a href="privacy">Privacy</a> | <a href="#">About Us</a> | <a  href="#">Contact Us</a> | <a  href="home.html">Home</a>
+
+            </p>
+        </small>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Trackerr is a parcel tracking system that help vendor to generate a tracking number and track thier parcels" />
+    <meta name="keywords" content="track, tracking number, vendor, parcel, customer" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:700&display=swap" rel="stylesheet" />
+
+    <title>Trackerr</title>
+    <link rel="stylesheet" href="/static/styles/pwdupdate.css" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+    </style>
+</head>
+
+<body>
+    <div class="div-container">
+        <nav class="nav-bar">
+            <div class="logo">
+                <img src="/static/image/Trakerr.jpeg" alt="Company Logo" width="100" height="50" class="logo" title="Our Company Logo">
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div>
+                <button class="login"><a href="./login.html">Login</a></button>
+                <button class="register">Register</button>
+            </div>
+        </nav>
+    </div>
+    <div class="my-form__wrapper">
+        <div class="login-welcome-row">
+            <h2>Password Update</h2>
+        </div>
+
+        <form class="my-form">
+            <div class="socials-col">
+                <label for="oldPassword">Old Password:</label>
+                <div class="password-input">
+                    <input type="password" id="oldPassword" name="oldPassword" required>
+                </div>
+                <label for="newPassword">New Password:</label>
+                <div class="password-input">
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <br>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <br>
+                <p id="passwordMessage" style="color: red;"></p>
+                <br>
+                
+                <button type="button" onclick="updatePassword()">Update Password</button>
+
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        function updatePassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const passwordMessage = document.getElementById('passwordMessage');
+
+            if (newPassword === confirmPassword) {
+                // Passwords match, you can proceed with the update
+                passwordMessage.style.color = 'green';
+                passwordMessage.textContent = 'Password updated successfully!';
+                // Add your password update logic here
+            } else {
+                // Passwords do not match
+                passwordMessage.style.color = 'red';
+                passwordMessage.textContent = 'Passwords do not match. Please try again.';
+            }
+        }
+
+        function showPassword() {
+            const newPasswordInput = document.getElementById("newPassword");
+            const confirmPasswordInput = document.getElementById("confirmPassword");
+
+            // Set the input type to "text" to show the password
+            newPasswordInput.type = "text";
+            confirmPasswordInput.type = "text";
+        }
+    </script>
+    <footer>
+        <small>
+            <a href="E-commerce">E-Commerce Solutions</a>
+            <p>© 2023 ALX Final Project · All Rights Reserved | <a href="privacy">Privacy</a> | <a href="#">About Us</a> | <a  href="#">Contact Us</a> | <a  href="home.html">Home</a>
+                
+        
+
+            </p>
+        </small>
+    </footer>
+
+</body>
+
+</html>
