@@ -36,4 +36,4 @@ def contact_us(name: str, email: str, msg: str) -> None:
     yagmail.register(sender, pw)
     yag = yagmail.SMTP(sender)
     headers = {"Reply-to": email}
-    yag.send(to='officialtrackerr@gmail.com', subject=f"Message from customer", headers=headers, contents=f"Hello from {name}, \n{msg}")
+    yag.send(to='officialtrackerr@gmail.com', subject="Message from customer", headers=headers, contents=f"Hello from {name}, \n{msg}")

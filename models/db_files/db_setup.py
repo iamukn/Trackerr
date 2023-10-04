@@ -143,7 +143,8 @@ class UserInfo:
 
     def recovery(self, rec_email: str) -> str:
         """Resets a password and sends an email to the client"""
-        otp = str(randint(125800, 989899)).encode()
+        otp = str(randint(1258000, 9898990))
+        otp = f"A{otp}".encode()
         temp_pass = hashpw(otp, gensalt())
         otp = otp.decode()
         try:

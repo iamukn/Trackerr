@@ -16,7 +16,8 @@ $(document).ready(function () {
       url: "check_email_endpoint", //
       method: "POST",
       dataType: "json",
-      data: data,
+      contentType: "application/json",
+      data: JSON.stringify(data),
       success: function (response) {
         // Handle the response from the server
         if (response.exists) {
@@ -24,9 +25,10 @@ $(document).ready(function () {
 
           // Sends a request to the server to generate and send OTP
           $.ajax({
-            url: "send_otp_endpoint",
+            url: "/recovery",
             method: "POST",
             dataType: "json",
+            contentType: "application/json",
             data: data, // Send email data to the server
             success: function (otpResponse) {
               console.log("OTP sent successfully");

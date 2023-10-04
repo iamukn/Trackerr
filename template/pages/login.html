@@ -10,7 +10,7 @@
   <body>
     <div class="login-wrapper">
       <div class="login-side">
-        <a href="#" title="Logo">
+        <a href="/" title="Logo">
           <img
             class="logo"
             src="../static/assets/chevron.svg"
@@ -23,7 +23,7 @@
             <h1>Welcome back &#x1F44F;</h1>
             <p>Please enter your details!</p>
           </div>
-          <form class="my-form">
+          <form action={{url_for('login')}} class="my-form" method='post'>
             <div class="socials-row">
               <a href="#" title="Use Google">
                 <img
@@ -71,16 +71,16 @@
                 src="../static/login-02/assets/password.svg"
               />
             </div>
-            <input type="submit" class="my-form__button" value="Login" />
+           <input type="submit" class="my-form__button" value="Login" />
             <div class="my-form__actions">
               <div class="my-form__row">
                 <span>Did you forget your password?</span>
-                <a href="./resetPassword.html" title="Reset Password">
+                <a href={{url_for('recover')}} title="Reset Password">
                   Reset Password
                 </a>
               </div>
               <div class="my-form__signup">
-                <a href="#" title="Create Account"> Register as Vendor</a>
+                  <a href="#" title="Create Account"> Register as Vendor</a>
               </div>
             </div>
           </form>

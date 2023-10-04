@@ -74,8 +74,8 @@ def home():
 def login():
     """Login form page"""
     if request.method == "POST":
-        username = request.json.get("username")
-        password = request.json.get("password")
+        username = request.form.get("email")
+        password = request.form.get("password")
 
         # checks the username and password in the database
         if db.auth(username, password):
@@ -95,7 +95,7 @@ def login():
 @app.route("/tracking", methods=["GET", "POST"], strict_slashes=False)
 def tracking():
     if request.method == "POST":
-        tracking_num = request.json.get("tracking")
+        tracking_num = request.json.get("search")
         res = track.tracker(str(tracking_num.upper()))
         data = {}
         for key, val in res.items():
@@ -130,6 +130,7 @@ def tracking_(num):
                 pass
             else:
                 data[key] = res.get(key)
+        print(data)
         return jsonify(data)
 
 # Tracking info update route
@@ -206,10 +207,10 @@ def generate():
 def recover():
     """recovery password function"""
     if request.method == "POST":
-        rec_email = request.form["email"]
+        rec_email = request.form.get("email")
         msg = db.recovery(rec_email)
-        return render_template("recovery.html", msg=msg)
-    return render_template("recovery.html")
+        return render_template("resetPassword.html", msg=msg)
+    return render_template("resetPassword.html")
 
 
 @app.route("/dashboard/reset", methods=["GET", "PUT"], strict_slashes=False)
@@ -236,15 +237,19 @@ def reset():
 def contactus():
     """ contact us """
     if request.method == 'POST':
-        name = request.json.get('name')
-        email = request.json.get('email')
-        msg = request.json.get('message')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        msg = request.form.get('message')
         # forwards the message to the team
         contact_us(name=name,email=email, msg=msg)
         return jsonify({"status": "200"})
     else:
         return render_template('contact.html')
         
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 @app.route("/logout", strict_slashes=False)
 def logout():
