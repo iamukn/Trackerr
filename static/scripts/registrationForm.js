@@ -13,7 +13,7 @@ $(document).ready(function () {
       service: $("#service").val(),
       city: $("#city").val(),
       country: $("#country").val(),
-      companyAddr: $("#companyAddr").val(),
+      companyAddr: $("#ScompanyAddr").val(),
     };
 
     $.ajax({
