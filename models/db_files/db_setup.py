@@ -70,11 +70,11 @@ class UserInfo:
         """registers user information to the database"""
         # checks for uniqueness of username and email in the database
         if reg.find_one({"Username": username}) and reg.find_one({"Email": email}):
-            raise Exception
+            return "Username and password already exist"
         elif reg.find_one({"Username": username}):
-            raise Exception
+            return "Username already exist"
         elif reg.find_one({"Email": email}):
-            raise Exception
+            return "Email already exist"
         else:
             # Registers the user to the database
             if (

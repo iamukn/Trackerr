@@ -3,7 +3,7 @@ $(document).ready(function () {
     event.preventDefault();
 
     var formData = {
-      fullName: $("#fullName").val(),
+      fullName: $("#firstName").val(),
       lastName: $("#lastName").val(),
       password: $("#password").val(),
       phone: $("#phone").val(),
@@ -23,10 +23,11 @@ $(document).ready(function () {
        dataType: "json",
        contentType: "application/json",  
        success: function (response) {
-       $("#response").text("Registration successful!");
+        alert(response.message);
+       $("#response").text(response.message);
       },
       error: function () {
-        $("#response").text("Registration failed. Please try again.");
+        $("#response").text(response.message);
       },
     });
   });

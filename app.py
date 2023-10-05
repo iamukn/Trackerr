@@ -164,7 +164,7 @@ def signup():
         phone = request.json.get("phone")
         # Register the data to the database
         try:
-            db.register(
+            res = db.register(
                 companyName=com_name,
                 service=service,
                 firstName=firstName,
@@ -177,8 +177,10 @@ def signup():
                 city=city,
                 phone=phone,
             )
-            email_msg(email, username)
-            return jsonify({"message": "Successful"})
+        #    email_msg(email, username)
+            data = {"message": f"{res}"}
+            print(data)
+            return jsonify(data)
         except Exception as e:
             return jsonify({"message": "Username or Email already exist"})
 

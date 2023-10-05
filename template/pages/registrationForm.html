@@ -349,42 +349,7 @@
         
     </div>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script> 
-     $(document).ready(function () {
-  $("#registrationForm").submit(function (event) {
-    event.preventDefault();
-
-    var formData = {
-      firstName: $("#firstName").val(),
-      lastName: $("#lastName").val(),
-      password: $("#password").val(),
-      phone: $("#phone").val(),
-      email: $("#email").val(),
-      companyName: $("#companyName").val(),
-      username: $("#username").val(),
-      service: $("#service").val(),
-      city: $("#city").val(),
-      country: $("#country").val(),
-      companyAddr: $("#companyAddr").val(),
-    };
-
-    $.ajax({
-      type: "POST",
-      url: "/signup", // Replace with your server endpoint
-      data: JSON.stringify(formData),
-      contentType: "application/json",
-      success: function (response) {
-        alert(response.message)
-        $("#response").text("Registration successful!");
-      },
-      error: function () {
-        $("#response").text("Registration failed. Please try again.");
-      },
-    });
-  });
-});
-
-</script>
+   <script src="../static/scripts/registrationForm.js"></script>
     
 </body>
 </html>
