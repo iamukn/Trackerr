@@ -76,7 +76,7 @@
     <div class="container">
         <h2>Vendor Registration</h2>
         <form id="registrationForm">
-            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="text" id="firstName" placeholder="First Name" required>
             <input type="text" id="lastName" placeholder="Last Name" required>
             <input type="password" id="password" placeholder="Password" required>
             <input type="tel" id="phone" placeholder="Phone, start with your country code without 0" required>
@@ -355,7 +355,7 @@
     event.preventDefault();
 
     var formData = {
-      fullName: $("#fullName").val(),
+      firstName: $("#firstName").val(),
       lastName: $("#lastName").val(),
       password: $("#password").val(),
       phone: $("#phone").val(),
@@ -371,8 +371,10 @@
     $.ajax({
       type: "POST",
       url: "/signup", // Replace with your server endpoint
-      data: formData,
+      data: JSON.stringify(formData),
+      contentType: "application/json",
       success: function (response) {
+        alert(response.message)
         $("#response").text("Registration successful!");
       },
       error: function () {
