@@ -151,17 +151,17 @@ def trackinfo_update():
 def signup():
     """Registration"""
     if request.method == "POST":
-        com_name = request.form["companyName"]
-        service = request.form["service"]
-        firstName = request.form["firstName"]
-        email = request.form["email"]
-        username = request.form["username"]
-        lastName = request.form["lastName"]
-        password = request.form["password"]
-        companyAddr = request.form["companyAddr"]
-        country = request.form["country"]
-        city = request.form["city"]
-        phone = request.form["phone"]
+        com_name = request.json.get("companyName")
+        service = request.json.get("service")
+        firstName = request.json.get("firstName")
+        email = request.json.get("email")
+        username = request.json.get("username")
+        lastName = request.json.get("lastName")
+        password = request.json.get("password")
+        companyAddr = request.json.get("companyAddr")
+        country = request.json.get("country")
+        city = request.json.get("city")
+        phone = request.json.get("phone")
         # Register the data to the database
         try:
             db.register(
@@ -178,8 +178,9 @@ def signup():
                 phone=phone,
             )
             email_msg(email, username)
-        except Exception:
-            return "An error occured"
+            return jsonify({"message": "Successful"})
+        except Exception as e:
+            return jsonify({"message": "Username or Email already exist"})
 
         finally:
             return redirect(url_for("login"))

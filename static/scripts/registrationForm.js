@@ -17,11 +17,13 @@ $(document).ready(function () {
     };
 
     $.ajax({
-      type: "POST",
-      url: "your_server_url_here", // Replace with your server endpoint
-      data: formData,
-      success: function (response) {
-        $("#response").text("Registration successful!");
+       type: "POST",
+       url: "/signup", // Replace with your server endpoint
+       data: JSON.stringify(formData),
+       dataType: "json",
+       contentType: "application/json",  
+       success: function (response) {
+       $("#response").text("Registration successful!");
       },
       error: function () {
         $("#response").text("Registration failed. Please try again.");
