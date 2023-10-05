@@ -184,7 +184,7 @@ def signup():
         finally:
             return redirect(url_for("login"))
     else:
-        return render_template("register.html")
+        return render_template("registrationForm.html")
 
 
 @app.route("/dashboard", strict_slashes=False)
@@ -241,9 +241,10 @@ def contactus():
         name = request.form.get('name')
         email = request.form.get('email')
         msg = request.form.get('message')
+        print(name, email, msg)
         # forwards the message to the team
         contact_us(name=name,email=email, msg=msg)
-        return jsonify({"status": "200"})
+        return render_template('contact.html', msg="Message sent, click here to return to home")
     else:
         return render_template('contact.html')
         

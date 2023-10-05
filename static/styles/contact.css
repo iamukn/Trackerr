@@ -115,6 +115,10 @@ body {
   background: #b39eb5;
 }
 
+#res {
+color: black;
+}
+
 @media (max-width: 950px) {
   .container {
     width: 90%;

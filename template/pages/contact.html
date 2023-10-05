@@ -16,27 +16,27 @@
   </head>
   <body>
     <div class="container">
-      <a href="./landingPage.html">
-        <img src="../static/static/assets/back-svgrepo-com" alt="home" />
+        <a href={{url_for('home')}}>
+        <img src="../static/assets/back-svgrepo-com (3).svg" alt="home" />
       </a>
       <div class="content">
         <div class="left-side">
           <div class="address details">
             <i class="fas fa-map-marker-alt"></i>
             <div class="topic">Address</div>
-            <div class="text-one">Lagos, 1245</div>
-            <div class="text-two">Port Harcot 06</div>
+            <div class="text-one">Lagos, Ng</div>
+            <div class="text-two">Accra, Gh</div>
           </div>
           <div class="phone details">
             <i class="fas fa-phone-alt"></i>
             <div class="topic">Phone</div>
-            <div class="text-one">+233540985004</div>
+            <div class="text-one">+2348020741046</div>
             <div class="text-two">+23399076363</div>
           </div>
           <div class="email details">
             <i class="fas fa-envelope"></i>
             <div class="topic">Email</div>
-            <div class="text-one">trackerr@gmail.com</div>
+            <div class="text-one">officialtrackerr@gmail.com</div>
           </div>
         </div>
         <div class="right-side">
@@ -77,6 +77,7 @@
             <div class="button">
               <input type="submit" value="Send Now" />
             </div>
+            <p><a id='res' href={{url_for('home')}}>{{msg}}</a></p>
           </form>
         </div>
       </div>
