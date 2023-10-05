@@ -191,7 +191,7 @@ def signup():
 def dashboard():
     """checks if the user is in the session and serves him his dashboard"""
     if g.user:
-        return render_template("VendorPage.html", user=session["user"])
+        return render_template("vendorPage.html", user=session["user"])
     abort(403, "Unauthorized")
 
 
