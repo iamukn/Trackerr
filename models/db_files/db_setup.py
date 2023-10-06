@@ -3,7 +3,7 @@
 
 
 from bcrypt import checkpw, gensalt, hashpw
-#from models.py_files.welcome_msg import email as email_msg
+from models.py_files.welcome_msg import email as email_msg
 from pymongo import MongoClient
 from random import randint
 import yagmail
@@ -115,7 +115,7 @@ class UserInfo:
                 # increments the registered members in the database
                 count = db.get_collection("count")
                 count.update_one({}, {"$inc": {"registered_members": 1}})
-            #    email_msg(email, username)
+                email_msg(email, username)
                 return "Registration successful"
             else:
                 # Returns a message if one of the required fields is missing

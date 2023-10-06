@@ -6,7 +6,6 @@ from flask_cors import CORS
 import os
 from models.db_files.db_setup import UserInfo
 from models.py_files.welcome_msg import contact_us
-from models.py_files.welcome_msg import email as email_msg
 from models.db_files.track_db import Tracking
 
 try:
@@ -163,7 +162,6 @@ def signup():
         city = request.form.get("city")
         phone = request.form.get("phone")
         # Register the data to the database
-        print(f'befor {phone}, {email}, {city}')
         try:
             res = db.register(
                 companyName=com_name,
@@ -178,11 +176,9 @@ def signup():
                 city=city,
                 phone=phone,
             )
-            print(res)
-        #    email_msg(email, username)
             if res == 'Registration successful':
                 return render_template("registrationForm.html", msg=res)
-            print(phone, email, city) 
+ 
             return render_template("registration.html", msg=res, phone=phone, city=city, country=country, companyAddr=companyAddr, password=password, lastName=lastName, username=username, email=email, firstName=firstName, service=service, com_name=com_name)
         except Exception as e:
             print("Internal server error")
