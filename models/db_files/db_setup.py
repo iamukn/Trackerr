@@ -3,6 +3,7 @@
 
 
 from bcrypt import checkpw, gensalt, hashpw
+#from models.py_files.welcome_msg import email as email_msg
 from pymongo import MongoClient
 from random import randint
 import yagmail
@@ -69,12 +70,14 @@ class UserInfo:
     ) -> str:
         """registers user information to the database"""
         # checks for uniqueness of username and email in the database
-        if reg.find_one({"Username": username}) and reg.find_one({"Email": email}):
+        if reg.find_one({"Username": username.lower()}) and reg.find_one({"Email": email}):
             return "Username and password already exist"
-        elif reg.find_one({"Username": username}):
+        elif reg.find_one({"Username": username.lower()}):
             return "Username already exist"
-        elif reg.find_one({"Email": email}):
+        elif reg.find_one({"Email": email.lower()}):
             return "Email already exist"
+        elif reg.find_one({"Phone": phone}):
+            return "Phone number already exist"
         else:
             # Registers the user to the database
             if (
@@ -94,7 +97,7 @@ class UserInfo:
                 password = hashpw(password.encode(), gensalt())
                 reg.insert_one(
                     {
-                        "companyName": companyName,
+                        "companyName": companyName.lower(),
                         "Services": service,
                         "firstName": firstName,
                         "lastName": lastName,
@@ -112,7 +115,7 @@ class UserInfo:
                 # increments the registered members in the database
                 count = db.get_collection("count")
                 count.update_one({}, {"$inc": {"registered_members": 1}})
-
+            #    email_msg(email, username)
                 return "Registration successful"
             else:
                 # Returns a message if one of the required fields is missing

@@ -76,16 +76,16 @@
     <div class="container">
         <h2>Vendor Registration</h2>
         <form action='/signup' method='post' id="registrationForm">
-            <input type="text" name='firstName' id="firstName" placeholder="First Name" required>
-            <input type="text" name='lastName' id="lastName" placeholder="Last Name" required>
-            <input type="password"  name='password' id="password" placeholder="Password" required>
-            <input type="tel" id="phone"  name='phone' placeholder="Phone, start with your country code without 0" required>
-            <input type="email" id="email"  name='email' placeholder="Email" required>
-            <input type="text" id="companyName"  name='companyName' placeholder="Company Name" required>
-            <input type="text" id="username"  name='username' placeholder="Username" required>
-            <input type="text" id="service"  name='service' placeholder="Service" required>
-            <input type="text" id="city"  name='city' placeholder="City" required>
-            <select class="form-select"  name='country' id="country" name="country" required>
+            <input type="text" name='firstName' id="firstName" value={{firstName}} required>
+            <input type="text" name='lastName' id="lastName" value={{lastName}} required>
+            <input type="password" name='password' id="password" value={{password}}  required>
+            <input type="tel" id="phone" name='phone' value={{phone}}  required>
+            <input type="email" id="email" name='email' value={{email}}  required>
+            <input type="text" id="companyName" name='companyName' value={{com_name}}  required>
+            <input type="text" id="username" name='username' value={{username}} required>
+            <input type="text" id="service" name='service' value={{service}} required>
+            <input type="text" id="city" name='city' value={{city}} required>
+            <select class="form-select" name='country' id="country" value={{country}} name="country" required>
                 <option value="" disabled selected>Select Country</option>
                 <option>select country</option>
     <option value="AF">Afghanistan</option>

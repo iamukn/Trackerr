@@ -151,18 +151,19 @@ def trackinfo_update():
 def signup():
     """Registration"""
     if request.method == "POST":
-        com_name = request.json.get("companyName")
-        service = request.json.get("service")
-        firstName = request.json.get("firstName")
-        email = request.json.get("email")
-        username = request.json.get("username")
-        lastName = request.json.get("lastName")
-        password = request.json.get("password")
-        companyAddr = request.json.get("companyAddr")
-        country = request.json.get("country")
-        city = request.json.get("city")
-        phone = request.json.get("phone")
+        com_name = request.form.get("companyName")
+        service = request.form.get("service")
+        firstName = request.form.get("firstName")
+        email = request.form.get("email")
+        username = request.form.get("username")
+        lastName = request.form.get("lastName")
+        password = request.form.get("password")
+        companyAddr = request.form.get("companyAddr")
+        country = request.form.get("country")
+        city = request.form.get("city")
+        phone = request.form.get("phone")
         # Register the data to the database
+        print(f'befor {phone}, {email}, {city}')
         try:
             res = db.register(
                 companyName=com_name,
@@ -177,15 +178,16 @@ def signup():
                 city=city,
                 phone=phone,
             )
+            print(res)
         #    email_msg(email, username)
-            data = {"message": f"{res}"}
-            print(data)
-            return jsonify(data)
+            if res == 'Registration successful':
+                return render_template("registrationForm.html", msg=res)
+            print(phone, email, city) 
+            return render_template("registration.html", msg=res, phone=phone, city=city, country=country, companyAddr=companyAddr, password=password, lastName=lastName, username=username, email=email, firstName=firstName, service=service, com_name=com_name)
         except Exception as e:
-            return jsonify({"message": "Username or Email already exist"})
+            print("Internal server error")
+            return
 
-        finally:
-            return redirect(url_for("login"))
     else:
         return render_template("registrationForm.html")
 

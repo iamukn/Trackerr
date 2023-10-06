@@ -3,7 +3,7 @@ $(document).ready(function () {
     event.preventDefault();
 
     var formData = {
-      fullName: $("#firstName").val(),
+      firstName: $("#firstName").val(),
       lastName: $("#lastName").val(),
       password: $("#password").val(),
       phone: $("#phone").val(),
@@ -13,9 +13,9 @@ $(document).ready(function () {
       service: $("#service").val(),
       city: $("#city").val(),
       country: $("#country").val(),
-      companyAddr: $("#ScompanyAddr").val(),
+      companyAddr: $("#companyAddr").val(),
     };
-
+var a = {'msg':'success'};
     $.ajax({
        type: "POST",
        url: "/signup", // Replace with your server endpoint
@@ -23,11 +23,11 @@ $(document).ready(function () {
        dataType: "json",
        contentType: "application/json",  
        success: function (response) {
-        alert(response.message);
-       $("#response").text(response.message);
+        console.log(response);
+       $("#response").text(a.msg);
       },
       error: function () {
-        $("#response").text(response.message);
+        $("#response").text('Error');
       },
     });
   });
