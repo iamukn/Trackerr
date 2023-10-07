@@ -97,6 +97,6 @@ class Tracking:
         """Methods that monitors the site traffic"""
         try:
             col = db.get_collection("count")
-            col.update_one({"_id": 1}, {"$inc": {"site_traffic": 1}})
+            col.update_one({"visits":{'$gte': 0}}, {"$inc": {"visits": 1}})
         except Exception as e:
             return "Internal error occured"

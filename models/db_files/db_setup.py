@@ -114,7 +114,7 @@ class UserInfo:
                 )
                 # increments the registered members in the database
                 count = db.get_collection("count")
-                count.update_one({}, {"$inc": {"registered_members": 1}})
+                count.update_one({'registered_members': {'$gte': 0}}, {"$inc": {"registered_members": 1}})
                 email_msg(email, username)
                 return "Registration successful"
             else:
