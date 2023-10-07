@@ -24,7 +24,7 @@ def email(email: str, user: str) -> None:
             to=email,
             subject="Welcome to Trackerr",
             headers=headers,
-            contents=f"Hello {user} \n" + data,
+            contents=f"<h3>Hello {user}</h3>," + data,
         )
 
 def contact_us(name: str, email: str, msg: str) -> None:
