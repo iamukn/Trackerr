@@ -55,11 +55,14 @@ class Tracking:
 
     def tracker(self, tracking: str) -> dict:
         """Method that retrieves the tracking information"""
-        data = self.db.find_one({"tracking_number": tracking})
         try:
-            return data
-        except Exception:
-            return "Please enter a valid tracking number"
+            data = self.db.find_one({"tracking_number": tracking})
+            if data.get('tracking_number'):
+                return data
+            else:
+                raise Exception
+        except Exception as e:
+            return e
 
     def update_tracking(self, tracking: str, status: str) -> str:
         """Updates the status of the tracking"""

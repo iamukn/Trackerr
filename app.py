@@ -95,14 +95,17 @@ def login():
 def tracking():
     if request.method == "POST":
         tracking_num = request.json.get("search")
-        res = track.tracker(str(tracking_num.upper()))
-        data = {}
-        for key, val in res.items():
-            if key == '_id':
-                pass
-            else:
-                data[key] = res.get(key)
-        return jsonify(data)
+        try:
+            res = track.tracker(str(tracking_num.upper()))
+            data = {}
+            for key, val in res.items():
+                if key == '_id':
+                    pass
+                else:
+                    data[key] = res.get(key)
+            return jsonify(data)
+        except Exception:
+            print('Invalid tracking number')
     return render_template('landingPage.html')
 
 
@@ -123,15 +126,19 @@ def tracking():
 @app.route("/tracking/<num>", methods=["GET", "POST"], strict_slashes=False)
 def tracking_(num):
     if num:
-        res = track.tracker(num)
-        data = {}
-        for key, val in res.items():
-            if key == '_id':
-                pass
-            else:
-                data[key] = res.get(key)
-        print(data)
-        return jsonify(data)
+        try:
+            res = track.tracker(num)
+            data = {}
+            for key, val in res.items():
+                if key == '_id':
+                    pass
+                else:
+                    data[key] = res.get(key)
+            print(data)
+            return jsonify(data)
+        except Exception:
+            return jsonify({"updated_on":"","status2":"Invalid Tracking Number","time":" ", "status1":"Invalid", "created_on":"","tracking_number": f"{num}"})
+
 
 # Tracking info update route
 @app.route('/dashboard/tracking/update', methods=['PUT', 'GET'])
