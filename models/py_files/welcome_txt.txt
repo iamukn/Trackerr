@@ -1,11 +1,10 @@
+ We're excited to have you join our community of vendors who are using Trackerr to generate, update, and track shipments for their clients.
+ Trackerr makes it easy to keep track of your shipments, so you can spend less time managing logistics and more time focusing on your business.
+ To get started, simply log in to your Trackerr <a href='#'>account</a> and click on the "Generate" button. You'll be able to generate a tracking number for your potential shipment and send the tracking number to your client.
+ Your client can then track their shipment on the Trackerr web application. They'll be able to see the current status of their shipment, as well as the estimated delivery date.
+ We're here to help you every step of the way. If you have any questions, please don't hesitate to contact us at officialtrackerr@gmail.com.
+ Thanks again for joining Trackerr! We look forward to helping you grow your business.<br>
+ Sincerely,
 
-  We're excited to have you join our community of vendors who are using Trackerr to generate, update, and track shipments for their clients.
-  Trackerr makes it easy to keep track of your shipments, so you can spend less time managing logistics and more time focusing on your business.
-  To get started, simply log in to your Trackerr <a href='#'>account</a> and click on the "Generate" button. You'll be able to generate a tracking number for your potential shipment and send the tracking number to your client.
-  Your client can then track their shipment on the Trackerr web application. They'll be able to see the current status of their shipment, as well as the estimated delivery date.
-  We're here to help you every step of the way. If you have any questions, please don't hesitate to contact us at officialtrackerr@gmail.com.
-  Thanks again for joining Trackerr! We look forward to helping you grow your business.<br>
-  Sincerely,
-
-  The Trackerr Team
+ The Trackerr Team
 
