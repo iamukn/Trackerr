@@ -35,6 +35,8 @@ class Tracking:
                     "status1": "pending",
                     "created_on": f"{date}",
                     "time": f'{datetime.datetime.now().strftime("%H:%M:%S")}',
+                    "status2": "awaiting shipping!",
+                    "updated_on": " "
                 }
             )
             # update the tracking count on the database
@@ -73,7 +75,7 @@ class Tracking:
             if data.get("status1") == "pending" and status.lower() == "in transit":
                 self.db.update_one(
                     {"tracking_number": tracking.upper()},
-                    {"$set": {"status1": status, "updated_on": f"{date}-{time}"}},
+                    {"$set": {"status1": status, "updated_on": f"{date}-{time}", "status2":"shipped"}},
                 )
                 return True
             elif (
