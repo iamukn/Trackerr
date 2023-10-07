@@ -2,13 +2,11 @@ $(document).ready(function () {
   let generatedTrackingNumber = "";
   let userName = "";
 
-  // Fetch User Name on Page Load
-  fetchUserName();
 
   // Generate Tracking Number Button
   $("#generateBtn").click(function () {
     $.ajax({
-      url: "http://127.0.0.1/dashboard/generate",
+        url: "/dashboard/generate",
       type: "GET",
       success: function (data) {
         // Retrieve the generated tracking number from the backend
