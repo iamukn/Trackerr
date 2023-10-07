@@ -28,10 +28,10 @@ $(document).ready(function () {
     let updatedStatus = $("#updatedStatusSelect").val();
 
     // Check if the tracking number has been registered
-    if (updateTrackingNumber !== generatedTrackingNumber) {
-      $("#updateFeedback").text("Tracking number not registered.");
-      return;
-    }
+ //   if (updateTrackingNumber !== generatedTrackingNumber) {
+ //     $("#updateFeedback").text("Tracking number not registered.");
+  //    return;
+  //  }
 
     // Prepare data for AJAX POST request
     let postData = {
@@ -41,15 +41,17 @@ $(document).ready(function () {
 
     // Send AJAX POST request to update tracking status
     $.ajax({
-      url: "http://127.0.0.1/dashboard/tracking/update",
-      type: "POST",
-      data: postData,
-      success: function () {
+      url: "/dashboard/tracking/update",
+      type: "PUT",
+      dataType:"json",
+      contentType: "application/json",
+      data: JSON.stringify(postData),
+      success: function (data) {
         $("#updateFeedback").text(
-          `Updated Status for Tracking Number ${updateTrackingNumber}: ${updatedStatus}`
+          `${data.response}`
         );
       },
-      error: function () {
+      error: function (error) {
         alert("Failed to update tracking status.");
       },
     });

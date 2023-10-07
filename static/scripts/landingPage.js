@@ -39,7 +39,7 @@ $(document).ready(function () {
           <div class="product-info">
               
               <p  class="item">Tracking Number: ${data.tracking_number}</p>
-              <p class="item">Status: ${data.status2.toUpperCase()}</p>
+              <p class="item">Status: ${data.status2.toLowerCase()}</p>
               <button class="detail-button collapsible-button item">View details</button>
               <div class="collapsible-content item">
               <div class="container animate__animated animate__zoomInDown">
@@ -48,7 +48,7 @@ $(document).ready(function () {
                   <div class="row justify-content-between">
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
-                      <p id="shippedStatus">${data.status1.toUpperCase()}<br /><span id="updateDate">${data.created_on}-${data.time}</span></p>
+                      <p id="shippedStatus">${data.status1.toLowerCase()}<br /><span id="updateDate">${data.created_on}-${data.time}</span></p>
                     </div>
                     <div class="order-tracking completed">
                       <span class="is-complete"></span>
@@ -56,7 +56,7 @@ $(document).ready(function () {
                     </div>
                     <div class="order-tracking">
                       <span class="is-complete"></span>
-                      <p id="deliveredStatus">${data.status2.toUpperCase()}<br /><span id="updateDate">${data.updated_on}</span></p>
+                      <p id="deliveredStatus">${data.status2.toLowerCase()}<br /><span id="updateDate">${data.updated_on}</span></p>
                     </div>
                   </div>
                 </div>

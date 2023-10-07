@@ -147,8 +147,8 @@ def trackinfo_update():
         if request.method == 'PUT':
             trackNum = request.json.get('trackingNumber')
             status = request.json.get('status')
-            track.update_tracking(trackNum, status)
-            return "Updated successfully"
+            data = track.update_tracking(trackNum, status)
+            return jsonify({"response":f"{data}!"})
         elif request.method == 'GET':
             return render_template('updateTracking.htm')
     abort(403, 'Unauthorized')

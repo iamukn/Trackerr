@@ -72,12 +72,19 @@ class Tracking:
         time = datetime.datetime.now().strftime("%H:%M:%S")
         data = self.db.find_one({"tracking_number": tracking})
         try:
-            if data.get("status1") == "pending" and status.lower() == "in transit":
+            if data.get('status2') == "delivered" or data.get('status2') == "returned" and status.lower() == 'in transit':
+                return f"Package already {data.get('status2')}!"
+            elif data.get('status1') == "in transit" and status.lower() == 'in transit':
+                print(status.lower())
+                return "Package already in transit!"
+            elif data.get('status2') == "delivered" and status.lower() == 'delivered' or  data.get('status2') == "returned" and status.lower() == 'returned' or data.get('status2') == 'delivered' and status.lower() == 'returned' and data.get('status2') == 'returned' and status.lower() == 'delivered':
+                return f"Shipment already {data.get('status2')}!"
+            elif data.get("status1") == "pending" and status.lower() == "in transit":
                 self.db.update_one(
                     {"tracking_number": tracking.upper()},
-                    {"$set": {"status1": status, "updated_on": f"{date}-{time}", "status2":"shipped"}},
+                    {"$set": {"status1": status.lower(), "updated_on": f"{date}-{time}", "status2":"shipped"}},
                 )
-                return True
+                return f"Update successful for {tracking} with status {status}!"
             elif (
                 data.get("status1") == "in transit"
                 and status.lower() == "delivered"
@@ -85,13 +92,13 @@ class Tracking:
             ):
                 self.db.update_one(
                     {"tracking_number": tracking.upper()},
-                    {"$set": {"status2": status, "updated_on": f"{date}-{time}"}},
+                    {"$set": {"status2": status.lower(), "updated_on": f"{date}-{time}"}},
                 )
-                return True
+                return f"Update successful for {tracking} with status {status}!"
             else:
-                return "Enter a Valid tracking number"
+                return f"An error occured, please try again"
         except Exception:
-            return "Enter a Valid tracking number"
+            return "internal server error"
 
     def site_traffic(self):
         """Methods that monitors the site traffic"""
